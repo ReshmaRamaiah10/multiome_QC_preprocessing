@@ -14,3 +14,7 @@ results/Sample_BCG_h2/ArchR/Sample_BCG_h2/ArrowFiles/Sample_BCG_h2.arrow
 results/Sample_BCG_h4/pre_filt_rna_adata.h5ad
 results/Sample_BCG_h4/ArchR/Sample_BCG_h4/ArrowFiles/Sample_BCG_h4.arrow
 results/Sample_BCG_h4/ArchR/Sample_BCG_h4.arrow
+results/Sample_BCG_h1/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h1/cr_filt_rna_adata.h5ad
+results/Sample_BCG_h2/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h2/cr_filt_rna_adata.h5ad

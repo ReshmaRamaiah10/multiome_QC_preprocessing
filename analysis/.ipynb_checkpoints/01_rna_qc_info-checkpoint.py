@@ -8,6 +8,7 @@ import seaborn as sns
 import os
 import anndata
 from scipy.io import mmread
+import utils
 
 RIBO_GENE_PATH = '/data/peer/lpaddock/data/utils/RB_genes_human'
 
@@ -115,10 +116,27 @@ def load_anndata(mtx_dir):
     rna_adata = anndata.AnnData(matrix[gene_features,:].T,
                     var = var,
                     obs = obs)
+    rna_adata.var_names_make_unique()
 
     return rna_adata
+
+def calculate_qc_metrics(adata):
+    # calculate qc metrics
+    sc.pp.calculate_qc_metrics(adata, inplace = True)
+    # ribo content
+    ribo_genes = pd.read_csv(RIBO_GENE_PATH, header = None)[0].tolist()
+    ribo_genes = adata.var_names[adata.var_names.isin(ribo_genes)]
+    adata.var['ribo'] = adata.var_names.isin(ribo_genes)
+    row_sum_adata_ribo = np.sum(adata[:, ribo_genes].X.toarray(), axis=1)
+    adata.obs['ribo_pct'] = row_sum_adata_ribo / adata.obs['total_counts'] * 100
+    # mito content
+    mt_genes = adata.var_names[adata.var_names.str.startswith('MT-')]
+    adata.var['mito'] = adata.var_names.isin(mt_genes)
+    row_sum_adata_mito = np.sum(adata[:, mt_genes].X.toarray(), axis=1)
+    adata.obs['mito_pct'] = row_sum_adata_mito / adata.obs['total_counts'] * 100
+    return adata
     
-def prefilt_anndata(data, outs_dir):
+def preprocess_anndata(data, outs_dir):
     for sample_name in os.listdir(data):
         sample_path = os.path.join(data, sample_name)
         if os.path.isdir(sample_path):
@@ -126,25 +144,13 @@ def prefilt_anndata(data, outs_dir):
             mtx_dir = os.path.join(sample_path, "raw_feature_bc_matrix")
             if os.path.exists(mtx_dir):
                 adata = load_anndata(mtx_dir)
-                adata.var_names_make_unique()
+                
                 # rename barcodes to sample_name+barcodes and add the sample data to anndata
                 adata.obs_names = [f"{sample_name}#{barcode}" for barcode in adata.obs_names]
                 adata.obs['batch'] = sample_name
 
-                # calculate qc metrics
-                sc.pp.calculate_qc_metrics(adata, inplace = True)
-                # ribo content
-                ribo_genes = pd.read_csv(RIBO_GENE_PATH, header = None)[0].tolist()
-                ribo_genes = adata.var_names[adata.var_names.isin(ribo_genes)]
-                adata.var['ribo'] = adata.var_names.isin(ribo_genes)
-                row_sum_adata_ribo = np.sum(adata[:, ribo_genes].X.toarray(), axis=1)
-                adata.obs['ribo_pct'] = row_sum_adata_ribo / adata.obs['total_counts'] * 100
-                # mito content
-                mt_genes = adata.var_names[adata.var_names.str.startswith('MT-')]
-                adata.var['mito'] = adata.var_names.isin(mt_genes)
-                row_sum_adata_mito = np.sum(adata[:, mt_genes].X.toarray(), axis=1)
-                adata.obs['mito_pct'] = row_sum_adata_mito / adata.obs['total_counts'] * 100
-
+                # get qc metrics
+                calculate_qc_metrics(adata)
                 
                 # save as a new h5ad file
                 sample_outs_dir = os.path.join(outs_dir, sample_name)
@@ -162,7 +168,23 @@ def prefilt_anndata(data, outs_dir):
                 genes_metadata_plots(adata.var['n_cells_by_counts'], qc_plots_dir)
                 mt_content_plots(adata, qc_plots_dir)
                 ribo_content_plots(adata, qc_plots_dir)
+                
+                # get cellranger filtered barcodes
+                print('Subsetting by cellranger filtered cells')
+                filt_bc_path = os.path.join(sample_path, "filtered_feature_bc_matrix/barcodes.tsv.gz")
+                cr_cells = pd.read_csv(filt_bc_path,sep='\t',compression='gzip',header=None)[0].tolist()
+                cr_cells = [sample_name + '#' + x for x in cr_cells]
+                
+                # load unfiltered anndata and subset + embed
+                filt_ad = utils.subset_and_reprocess_rna(adata,cr_cells)
+                
+                # run doubletdetection on filtered anndata
+                utils.run_doubletdetection(filt_ad, sample_col = 'batch', layer = 'raw_counts')
+                
+                # save filtered anndata
+                filt_ad.write_h5ad(os.path.join(sample_outs_dir, f"cr_filt_rna_adata.h5ad"))
                 print('Processed sample', sample_name)
+                
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process data for quality control.')
@@ -180,4 +202,4 @@ if __name__ == "__main__":
     else:
         outs_dir = os.getcwd()
 
-    prefilt_anndata(sample_dir, outs_dir)
+    preprocess_anndata(sample_dir, outs_dir)
