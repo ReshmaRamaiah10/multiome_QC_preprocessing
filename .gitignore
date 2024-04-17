@@ -1,3 +1,4 @@
-data/*
-intermediate_files/*
-results/*
+results/Sample_BCG_h3/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h1/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h2/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h4/pre_filt_rna_adata.h5ad
