@@ -1,0 +1,1535 @@
+
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Logging With ArchR!
+
+Start Time : 2024-04-17 13:52:26
+
+------- ArchR Info
+
+ArchRThreads = 25
+ArchRGenome = Hg38
+
+------- System Info
+
+Computer OS = unix
+Total Cores = 128
+
+------- Session Info
+
+R version 4.2.3 (2023-03-15)
+Platform: x86_64-conda-linux-gnu (64-bit)
+Running under: CentOS Linux 7 (Core)
+
+Matrix products: default
+BLAS/LAPACK: /lilac/home/paddockl/miniconda3/envs/multiome_winner/lib/libopenblasp-r0.3.23.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] BSgenome.Hsapiens.UCSC.hg38_1.4.5 BSgenome_1.66.3                  
+ [3] rtracklayer_1.58.0                Biostrings_2.66.0                
+ [5] XVector_0.38.0                    ArchR_1.0.1                      
+ [7] magrittr_2.0.3                    rhdf5_2.42.1                     
+ [9] Matrix_1.5-4.1                    data.table_1.14.8                
+[11] SummarizedExperiment_1.28.0       Biobase_2.58.0                   
+[13] GenomicRanges_1.50.2              GenomeInfoDb_1.34.9              
+[15] IRanges_2.32.0                    S4Vectors_0.36.2                 
+[17] BiocGenerics_0.44.0               MatrixGenerics_1.10.0            
+[19] matrixStats_1.0.0                 ggplot2_3.4.2                    
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.0         lattice_0.21-8           colorspace_2.1-0        
+ [4] vctrs_0.6.3              generics_0.1.3           yaml_2.3.7              
+ [7] utf8_1.2.3               XML_3.99-0.14            rlang_1.1.1             
+[10] pillar_1.9.0             glue_1.6.2               withr_2.5.0             
+[13] BiocParallel_1.32.6      GenomeInfoDbData_1.2.9   lifecycle_1.0.3         
+[16] stringr_1.5.0            zlibbioc_1.44.0          munsell_0.5.0           
+[19] gtable_0.3.3             codetools_0.2-19         restfulr_0.0.15         
+[22] fansi_1.0.4              Rcpp_1.0.10              scales_1.2.1            
+[25] DelayedArray_0.24.0      Rsamtools_2.14.0         rjson_0.2.21            
+[28] stringi_1.7.12           dplyr_1.1.2              BiocIO_1.8.0            
+[31] grid_4.2.3               cli_3.6.1                tools_4.2.3             
+[34] bitops_1.0-7             rhdf5filters_1.10.1      RCurl_1.98-1.12         
+[37] tibble_3.2.1             crayon_1.5.2             pkgconfig_2.0.3         
+[40] Rhdf5lib_1.20.0          R6_2.5.1                 GenomicAlignments_1.34.1
+[43] compiler_4.2.3          
+
+
+------- Log Info
+
+
+2024-04-17 13:52:26 : createArrowFiles Input-Parameters, Class = list
+
+createArrowFiles Input-Parameters$inputFiles: length = 1
+                                                                                 Sample_BCG_h1 
+"/data/peer/lpaddock/repos/multiome_QC_preprocessing/data/Sample_BCG_h1/atac_fragments.tsv.gz" 
+
+
+createArrowFiles Input-Parameters$sampleNames: length = 1
+[1] "Sample_BCG_h1"
+
+
+createArrowFiles Input-Parameters$outputNames: length = 1
+[1] "Sample_BCG_h1"
+
+
+createArrowFiles Input-Parameters$validBarcodes: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$minTSS: length = 1
+[1] 0
+
+
+createArrowFiles Input-Parameters$minFrags: length = 1
+[1] 1
+
+
+createArrowFiles Input-Parameters$maxFrags: length = 1
+[1] 1e+20
+
+
+createArrowFiles Input-Parameters$QCDir: length = 1
+[1] "QualityControl"
+
+
+createArrowFiles Input-Parameters$nucLength: length = 1
+[1] 147
+
+
+createArrowFiles Input-Parameters$promoterRegion: length = 2
+[1] 2000  100
+
+
+createArrowFiles Input-Parameters$excludeChr: length = 1
+[1] "chrM"
+
+
+createArrowFiles Input-Parameters$nChunk: length = 1
+[1] 5
+
+
+createArrowFiles Input-Parameters$bcTag: length = 1
+[1] "qname"
+
+
+createArrowFiles Input-Parameters$gsubExpression: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$bamFlag: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$offsetPlus: length = 1
+[1] 4
+
+
+createArrowFiles Input-Parameters$offsetMinus: length = 1
+[1] -5
+
+
+createArrowFiles Input-Parameters$addTileMat: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$addGeneScoreMat: length = 1
+[1] FALSE
+
+
+createArrowFiles Input-Parameters$force: length = 1
+[1] FALSE
+
+
+createArrowFiles Input-Parameters$threads: length = 1
+[1] 25
+
+
+createArrowFiles Input-Parameters$parallelParam: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$subThreading: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$verbose: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$cleanTmp: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$logFile: length = 1
+[1] "ArchRLogs/ArchR-createArrows-a9323120dd8f-Date-2024-04-17_Time-13-52-26.log"
+
+
+createArrowFiles Input-Parameters$filterFrags: length = 1
+[1] 1
+
+
+createArrowFiles Input-Parameters$filterTSS: length = 1
+[1] 0
+
+
+
+2024-04-17 13:52:26 : Cleaning Temporary Files
+2024-04-17 13:52:26 : Batch Execution w/ safelapply!, 0 mins elapsed.
+
+###########
+2024-04-17 13:52:26 : Creating Arrow File Sample_BCG_h1.arrow (Sample_BCG_h1 : 1 of 1)
+###########
+
+
+2024-04-17 13:52:26 : validBC, Class = NULL
+
+validBC: length = 0
+NULL
+
+
+
+2024-04-17 13:52:26 : (Sample_BCG_h1 : 1 of 1) Determining Arrow Method to use!
+2024-04-17 13:52:26 : (Sample_BCG_h1 : 1 of 1) Reading In Fragments from inputFiles (readMethod = tabix), 0 mins elapsed.
+2024-04-17 13:52:26 : (Sample_BCG_h1 : 1 of 1) Tabix Bed To Temporary File, 0.001 mins elapsed.
+
+2024-04-17 13:52:26 : tileChromSizes, Class = GRanges
+GRanges object with 120 ranges and 1 metadata column:
+        seqnames              ranges strand |     chunkName
+           <Rle>           <IRanges>  <Rle> |   <character>
+    [1]     chr1          1-49791284      * |   chr1#chunk1
+    [2]     chr1   49791285-99582568      * |   chr1#chunk2
+    [3]     chr1  99582569-149373853      * |   chr1#chunk3
+    [4]     chr1 149373854-199165137      * |   chr1#chunk4
+    [5]     chr1 199165138-248956422      * |   chr1#chunk5
+    ...      ...                 ...    ... .           ...
+  [116]     chrY          1-11445483      * | chrY#chunk116
+  [117]     chrY   11445484-22890966      * | chrY#chunk117
+  [118]     chrY   22890967-34336449      * | chrY#chunk118
+  [119]     chrY   34336450-45781932      * | chrY#chunk119
+  [120]     chrY   45781933-57227415      * | chrY#chunk120
+  -------
+  seqinfo: 24 sequences from an unspecified genome; no seqlengths
+
+2024-04-17 13:53:13 : (Sample_BCG_h1 : 1 of 1) Reading TabixFile 42 Percent, 0.787 mins elapsed.
+
+2024-04-17 13:53:13 : (Sample_BCG_h1 : 1 of 1) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49791284, Class = data.table
+ 
+2024-04-17 13:53:13 : (Sample_BCG_h1 : 1 of 1) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49791284, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49791284: nRows = 7254738, nCols = 3
+      V2    V3                 V4
+1: 10002 10340 TCTCCTCGTGGGTACT-1
+2: 10067 10210 TTCGGTACAGGCCTTG-1
+3: 10068 10192 GGATTGCGTTACCGGG-1
+4: 10068 10198 ACCAAGCGTTGGATCA-1
+5: 10068 10198 CGGAGTCTCGAGGAAC-1
+6: 10073 10214 AAAGCACCAATTATGC-1
+
+
+
+2024-04-17 13:53:13 : (Sample_BCG_h1 : 1 of 1) .tabixToTmp Barcodes-Chunk-(1 of 120)-chr1:1-49791284, Class = character
+
+(Sample_BCG_h1 : 1 of 1) .tabixToTmp Barcodes-Chunk-(1 of 120)-chr1:1-49791284: length = 128718
+[1] "TCTCCTCGTGGGTACT-1" "TTCGGTACAGGCCTTG-1" "GGATTGCGTTACCGGG-1"
+[4] "ACCAAGCGTTGGATCA-1" "CGGAGTCTCGAGGAAC-1" "AAAGCACCAATTATGC-1"
+
+
+2024-04-17 13:53:50 : (Sample_BCG_h1 : 1 of 1) Reading TabixFile 85 Percent, 1.402 mins elapsed.
+2024-04-17 13:54:05 : (Sample_BCG_h1 : 1 of 1) Parallel Hdf5 Linkage Temporary File, 1.659 mins elapsed.
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) Successful creation of Temporary File, 1.672 mins elapsed.
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) Creating ArrowFile From Temporary File, 1.673 mins elapsed.
+
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) chunkChrNames, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) chunkChrNames: nRows = 118, nCols = 1
+     chunkNames
+1   chr1#chunk1
+2   chr1#chunk2
+3   chr1#chunk3
+4   chr1#chunk4
+5   chr1#chunk5
+6 chr10#chunk46
+
+
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) Counting Unique Barcodes From Temporary File, 1.676 mins elapsed.
+
+2024-04-17 13:54:26 : (Sample_BCG_h1 : 1 of 1) BarcodeFrequencyTable, Class = data.table
+ 
+2024-04-17 13:54:26 : (Sample_BCG_h1 : 1 of 1) BarcodeFrequencyTable, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) BarcodeFrequencyTable: nRows = 576959, nCols = 2
+            values.V1      V1
+1: TCAGTAGGTGTTGCTT-1 1339131
+2: TGTGTTAAGCCGCAAC-1 1325115
+3: TTGTTGCGTTCGCTTG-1 1254434
+4: ATATGCTCACCAGGTT-1 1159343
+5: GGATACTTCTGTGCAG-1 1112232
+6: GTTCTTAGTAGACAAA-1 1109477
+
+
+
+2024-04-17 13:54:26 : (Sample_BCG_h1 : 1 of 1) BarcodesMinMaxFrags, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) BarcodesMinMaxFrags: nRows = 576959, nCols = 1
+                  bc
+1 TCAGTAGGTGTTGCTT-1
+2 TGTGTTAAGCCGCAAC-1
+3 TTGTTGCGTTCGCTTG-1
+4 ATATGCTCACCAGGTT-1
+5 GGATACTTCTGTGCAG-1
+6 GTTCTTAGTAGACAAA-1
+
+
+
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Unique Chromosomes, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) Unique Chromosomes: nRows = 24, nCols = 1
+   chr
+1 chr1
+2 chr2
+3 chr3
+4 chr4
+5 chr5
+6 chr6
+
+
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 1 of 24, 2.059 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 2 of 24, 2.059 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 3 of 24, 2.059 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 4 of 24, 2.059 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 5 of 24, 2.06 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 6 of 24, 2.06 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 7 of 24, 2.06 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 8 of 24, 2.06 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 9 of 24, 2.06 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 10 of 24, 2.061 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 11 of 24, 2.061 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 12 of 24, 2.061 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 13 of 24, 2.061 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 14 of 24, 2.062 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 15 of 24, 2.062 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 16 of 24, 2.062 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 17 of 24, 2.063 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 18 of 24, 2.063 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 19 of 24, 2.064 mins elapsed.
+2024-04-17 13:54:29 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 20 of 24, 2.064 mins elapsed.
+2024-04-17 13:54:30 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 21 of 24, 2.064 mins elapsed.
+2024-04-17 13:54:30 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 22 of 24, 2.065 mins elapsed.
+2024-04-17 13:54:30 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 23 of 24, 2.065 mins elapsed.
+2024-04-17 13:54:30 : (Sample_BCG_h1 : 1 of 1) Adding Chromosome 24 of 24, 2.066 mins elapsed.
+
+2024-04-17 13:54:53 : (Sample_BCG_h1 : 1 of 1) .tmpToArrow Fragments-Chr-(1 of 24)-chr1, Class = IRanges
+
+(Sample_BCG_h1 : 1 of 1) .tmpToArrow Fragments-Chr-(1 of 24)-chr1: length = 24733046
+IRanges object with 6 ranges and 1 metadata column:
+          start       end     width |                 RG
+      <integer> <integer> <integer> |              <Rle>
+  [1]     10152     10215        64 | TCAGTAGGTGTTGCTT-1
+  [2]     17454     17508        55 | TCAGTAGGTGTTGCTT-1
+  [3]     86969     87150       182 | TCAGTAGGTGTTGCTT-1
+  [4]    135185    135368       184 | TCAGTAGGTGTTGCTT-1
+  [5]    180777    180874        98 | TCAGTAGGTGTTGCTT-1
+  [6]    180881    180936        56 | TCAGTAGGTGTTGCTT-1
+
+
+
+2024-04-17 13:54:53 : (Sample_BCG_h1 : 1 of 1) .tmpToArrow Barcodes-Chr-(1 of 24)-chr1, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) .tmpToArrow Barcodes-Chr-(1 of 24)-chr1: nRows = 215368, nCols = 1
+                  bc
+1 TCAGTAGGTGTTGCTT-1
+2 TGTGTTAAGCCGCAAC-1
+3 TTGTTGCGTTCGCTTG-1
+4 ATATGCTCACCAGGTT-1
+5 GGATACTTCTGTGCAG-1
+6 GTTCTTAGTAGACAAA-1
+
+
+2024-04-17 13:54:54 : (Sample_BCG_h1 : 1 of 1) Parallel Hdf5 Linkage Arrow File, 2.476 mins elapsed.
+2024-04-17 13:54:56 : (Sample_BCG_h1 : 1 of 1) Successful creation of Arrow File, 2.514 mins elapsed.
+2024-04-17 13:54:57 : (Sample_BCG_h1 : 1 of 1) Adding Fragment Summary, 2.526 mins elapsed.
+2024-04-17 13:56:03 : (Sample_BCG_h1 : 1 of 1) Plotting Fragment Size Distribution, 3.618 mins elapsed.
+2024-04-17 13:56:04 : (Sample_BCG_h1 : 1 of 1) Computing TSS Enrichment Scores, 3.638 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) Computed TSS Scores!, 0.297 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Number of Cells Pass Filter = 576959 , 3.935 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Median Frags = 3 , 3.935 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Median TSS Enrichment = 0 , 3.935 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) Plotting TSS Enrichment Scores, 3.936 mins elapsed.
+2024-04-17 13:56:45 : (Sample_BCG_h1 : 1 of 1) Adding Metadata to Fragments, 4.325 mins elapsed.
+2024-04-17 13:56:48 : (Sample_BCG_h1 : 1 of 1) Adding Additional Feature Counts!, 4.38 mins elapsed.
+2024-04-17 13:57:03 : (Sample_BCG_h1 : 1 of 1) Finished Adding Additional Feature Counts!, 4.63 mins elapsed.
+
+2024-04-17 13:57:03 : (Sample_BCG_h1 : 1 of 1) Metadata, Class = DFrame
+DataFrame with 576959 rows and 12 columns
+                    cellNames    nFrags nMonoFrags  nDiFrags nMultiFrags
+                  <character> <numeric>  <numeric> <numeric>   <numeric>
+1      Sample_BCG_h1#TCAGTA..   1339131     576767    722886       39478
+2      Sample_BCG_h1#TGTGTT..   1325115     481735    806578       36802
+3      Sample_BCG_h1#TTGTTG..   1254434     498108    727654       28672
+4      Sample_BCG_h1#ATATGC..   1159343     486332    635322       37689
+5      Sample_BCG_h1#GGATAC..   1112232     426448    661483       24301
+...                       ...       ...        ...       ...         ...
+576955 Sample_BCG_h1#CTGGTT..         1          0         0           1
+576956 Sample_BCG_h1#GACTTG..         1          0         1           0
+576957 Sample_BCG_h1#GTCCAT..         1          0         0           1
+576958 Sample_BCG_h1#TAGCAG..         1          1         0           0
+576959 Sample_BCG_h1#TTGTCA..         1          0         0           1
+       TSSEnrichment ReadsInTSS      Keep ReadsInPromoter PromoterRatio
+           <numeric>  <numeric> <numeric>       <numeric>     <numeric>
+1              7.237     158891         1          173799     0.0648925
+2              2.754      50694         1           79778     0.0301023
+3              2.689      47609         1           76169     0.0303599
+4              5.122      91004         1          112192     0.0483860
+5              2.682      41481         1           66720     0.0299937
+...              ...        ...       ...             ...           ...
+576955             0          0         1               0             0
+576956             0          0         1               0             0
+576957             0          0         1               0             0
+576958             0          0         1               0             0
+576959             0          0         1               0             0
+       ReadsInBlacklist BlacklistRatio
+              <numeric>      <numeric>
+1                 18008     0.00672376
+2                 18215     0.00687299
+3                 17682     0.00704780
+4                 16405     0.00707513
+5                 14420     0.00648246
+...                 ...            ...
+576955                2              1
+576956                2              1
+576957                2              1
+576958                2              1
+576959                2              1
+
+2024-04-17 13:57:11 : (Sample_BCG_h1 : 1 of 1) Removing Fragments from Filtered Cells, 4.757 mins elapsed.
+2024-04-17 13:57:11 : (Sample_BCG_h1 : 1 of 1) Creating Filtered Arrow File, 4.757 mins elapsed.
+
+2024-04-17 13:57:19 : (Sample_BCG_h1 : 1 of 1) .filterCellsFromArrow Fragments-Chr-(1 of 24)-chr1, Class = GRanges
+GRanges object with 24733046 ranges and 1 metadata column:
+             seqnames              ranges strand |                     RG
+                <Rle>           <IRanges>  <Rle> |                  <Rle>
+         [1]     chr1         10152-10215      * | Sample_BCG_h1#TCAGTA..
+         [2]     chr1         17454-17508      * | Sample_BCG_h1#TCAGTA..
+         [3]     chr1         86969-87150      * | Sample_BCG_h1#TCAGTA..
+         [4]     chr1       135185-135368      * | Sample_BCG_h1#TCAGTA..
+         [5]     chr1       180777-180874      * | Sample_BCG_h1#TCAGTA..
+         ...      ...                 ...    ... .                    ...
+  [24733042]     chr1 224059059-224059238      * | Sample_BCG_h1#TTTGTC..
+  [24733043]     chr1 205947991-205948231      * | Sample_BCG_h1#TTTGTC..
+  [24733044]     chr1 200195295-200195461      * | Sample_BCG_h1#TTTGTG..
+  [24733045]     chr1 205749643-205749693      * | Sample_BCG_h1#TTTGTG..
+  [24733046]     chr1 228766881-228767069      * | Sample_BCG_h1#TTTGTG..
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+
+
+2024-04-17 13:57:19 : (Sample_BCG_h1 : 1 of 1) .filterCellsFromArrow Barcodes-Chr-(1 of 24)-chr1, Class = data.frame
+(Sample_BCG_h1 : 1 of 1) .filterCellsFromArrow Barcodes-Chr-(1 of 24)-chr1: nRows = 215368, nCols = 1
+                                bc
+1 Sample_BCG_h1#TCAGTAGGTGTTGCTT-1
+2 Sample_BCG_h1#TGTGTTAAGCCGCAAC-1
+3 Sample_BCG_h1#TTGTTGCGTTCGCTTG-1
+4 Sample_BCG_h1#ATATGCTCACCAGGTT-1
+5 Sample_BCG_h1#GGATACTTCTGTGCAG-1
+6 Sample_BCG_h1#GTTCTTAGTAGACAAA-1
+
+
+2024-04-17 13:58:48 : (Sample_BCG_h1 : 1 of 1) Finished Constructing Filtered Arrow File!, 6.372 mins elapsed.
+2024-04-17 13:58:51 : (Sample_BCG_h1 : 1 of 1) Adding TileMatrix!, 6.415 mins elapsed.
+
+2024-04-17 13:58:52 : Sample_BCG_h1 .addTileMat FeatureDF, Class = DFrame
+DataFrame with 6176550 rows and 3 columns
+           seqnames       idx     start
+        <character> <integer> <numeric>
+1              chr1         1         0
+2              chr1         2       500
+3              chr1         3      1000
+4              chr1         4      1500
+5              chr1         5      2000
+...             ...       ...       ...
+6176546        chrY    114451  57225000
+6176547        chrY    114452  57225500
+6176548        chrY    114453  57226000
+6176549        chrY    114454  57226500
+6176550        chrY    114455  57227000
+
+2024-04-17 13:59:03 : Adding TileMatrix to Sample_BCG_h1 for Chr (1 of 24)!, 0.21 mins elapsed.
+
+2024-04-17 13:59:09 : NTiles_TileMatrix_1_chr1, Class = numeric
+
+NTiles_TileMatrix_1_chr1: length = 1
+  chr1 
+497913 
+
+
+
+2024-04-17 13:59:09 : NCells_TileMatrix_1_chr1, Class = integer
+
+NCells_TileMatrix_1_chr1: length = 1
+[1] 576959
+
+
+
+2024-04-17 13:59:09 : MinTile_TileMatrix_1_chr1, Class = numeric
+
+MinTile_TileMatrix_1_chr1: length = 1
+[1] 21
+
+
+
+2024-04-17 13:59:09 : MaxTile_TileMatrix_1_chr1, Class = numeric
+
+MaxTile_TileMatrix_1_chr1: length = 1
+[1] 497893
+
+
+
+2024-04-17 13:59:10 : MinCell_TileMatrix_1_chr1, Class = integer
+
+MinCell_TileMatrix_1_chr1: length = 1
+[1] 1
+
+
+
+2024-04-17 13:59:10 : MaxCell_TileMatrix_1_chr1, Class = integer
+
+MaxCell_TileMatrix_1_chr1: length = 1
+[1] 458432
+
+
+2024-04-17 13:59:22 : Adding TileMatrix to Sample_BCG_h1 for Chr (2 of 24)!, 0.518 mins elapsed.
+
+2024-04-17 13:59:25 : NTiles_TileMatrix_2_chr2, Class = numeric
+
+NTiles_TileMatrix_2_chr2: length = 1
+  chr2 
+484388 
+
+
+
+2024-04-17 13:59:25 : NCells_TileMatrix_2_chr2, Class = integer
+
+NCells_TileMatrix_2_chr2: length = 1
+[1] 576959
+
+
+
+2024-04-17 13:59:25 : MinTile_TileMatrix_2_chr2, Class = numeric
+
+MinTile_TileMatrix_2_chr2: length = 1
+[1] 21
+
+
+
+2024-04-17 13:59:25 : MaxTile_TileMatrix_2_chr2, Class = numeric
+
+MaxTile_TileMatrix_2_chr2: length = 1
+[1] 484367
+
+
+
+2024-04-17 13:59:25 : MinCell_TileMatrix_2_chr2, Class = integer
+
+MinCell_TileMatrix_2_chr2: length = 1
+[1] 1
+
+
+
+2024-04-17 13:59:25 : MaxCell_TileMatrix_2_chr2, Class = integer
+
+MaxCell_TileMatrix_2_chr2: length = 1
+[1] 518386
+
+
+2024-04-17 13:59:35 : Adding TileMatrix to Sample_BCG_h1 for Chr (3 of 24)!, 0.742 mins elapsed.
+
+2024-04-17 13:59:38 : NTiles_TileMatrix_3_chr3, Class = numeric
+
+NTiles_TileMatrix_3_chr3: length = 1
+  chr3 
+396592 
+
+
+
+2024-04-17 13:59:38 : NCells_TileMatrix_3_chr3, Class = integer
+
+NCells_TileMatrix_3_chr3: length = 1
+[1] 576959
+
+
+
+2024-04-17 13:59:38 : MinTile_TileMatrix_3_chr3, Class = numeric
+
+MinTile_TileMatrix_3_chr3: length = 1
+[1] 21
+
+
+
+2024-04-17 13:59:38 : MaxTile_TileMatrix_3_chr3, Class = numeric
+
+MaxTile_TileMatrix_3_chr3: length = 1
+[1] 396466
+
+
+
+2024-04-17 13:59:38 : MinCell_TileMatrix_3_chr3, Class = integer
+
+MinCell_TileMatrix_3_chr3: length = 1
+[1] 1
+
+
+
+2024-04-17 13:59:38 : MaxCell_TileMatrix_3_chr3, Class = integer
+
+MaxCell_TileMatrix_3_chr3: length = 1
+[1] 534138
+
+
+2024-04-17 13:59:46 : Adding TileMatrix to Sample_BCG_h1 for Chr (4 of 24)!, 0.923 mins elapsed.
+
+2024-04-17 13:59:48 : NTiles_TileMatrix_4_chr4, Class = numeric
+
+NTiles_TileMatrix_4_chr4: length = 1
+  chr4 
+380430 
+
+
+
+2024-04-17 13:59:48 : NCells_TileMatrix_4_chr4, Class = integer
+
+NCells_TileMatrix_4_chr4: length = 1
+[1] 576959
+
+
+
+2024-04-17 13:59:48 : MinTile_TileMatrix_4_chr4, Class = numeric
+
+MinTile_TileMatrix_4_chr4: length = 1
+[1] 21
+
+
+
+2024-04-17 13:59:48 : MaxTile_TileMatrix_4_chr4, Class = numeric
+
+MaxTile_TileMatrix_4_chr4: length = 1
+[1] 380410
+
+
+
+2024-04-17 13:59:48 : MinCell_TileMatrix_4_chr4, Class = integer
+
+MinCell_TileMatrix_4_chr4: length = 1
+[1] 1
+
+
+
+2024-04-17 13:59:48 : MaxCell_TileMatrix_4_chr4, Class = integer
+
+MaxCell_TileMatrix_4_chr4: length = 1
+[1] 540846
+
+
+2024-04-17 13:59:56 : Adding TileMatrix to Sample_BCG_h1 for Chr (5 of 24)!, 1.091 mins elapsed.
+
+2024-04-17 13:59:58 : NTiles_TileMatrix_5_chr5, Class = numeric
+
+NTiles_TileMatrix_5_chr5: length = 1
+  chr5 
+363077 
+
+
+
+2024-04-17 13:59:58 : NCells_TileMatrix_5_chr5, Class = integer
+
+NCells_TileMatrix_5_chr5: length = 1
+[1] 576959
+
+
+
+2024-04-17 13:59:58 : MinTile_TileMatrix_5_chr5, Class = numeric
+
+MinTile_TileMatrix_5_chr5: length = 1
+[1] 21
+
+
+
+2024-04-17 13:59:58 : MaxTile_TileMatrix_5_chr5, Class = numeric
+
+MaxTile_TileMatrix_5_chr5: length = 1
+[1] 362956
+
+
+
+2024-04-17 13:59:59 : MinCell_TileMatrix_5_chr5, Class = integer
+
+MinCell_TileMatrix_5_chr5: length = 1
+[1] 1
+
+
+
+2024-04-17 13:59:59 : MaxCell_TileMatrix_5_chr5, Class = integer
+
+MaxCell_TileMatrix_5_chr5: length = 1
+[1] 547874
+
+
+2024-04-17 14:00:06 : Adding TileMatrix to Sample_BCG_h1 for Chr (6 of 24)!, 1.256 mins elapsed.
+
+2024-04-17 14:00:08 : NTiles_TileMatrix_6_chr6, Class = numeric
+
+NTiles_TileMatrix_6_chr6: length = 1
+  chr6 
+341612 
+
+
+
+2024-04-17 14:00:08 : NCells_TileMatrix_6_chr6, Class = integer
+
+NCells_TileMatrix_6_chr6: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:08 : MinTile_TileMatrix_6_chr6, Class = numeric
+
+MinTile_TileMatrix_6_chr6: length = 1
+[1] 128
+
+
+
+2024-04-17 14:00:08 : MaxTile_TileMatrix_6_chr6, Class = numeric
+
+MaxTile_TileMatrix_6_chr6: length = 1
+[1] 341485
+
+
+
+2024-04-17 14:00:09 : MinCell_TileMatrix_6_chr6, Class = integer
+
+MinCell_TileMatrix_6_chr6: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:09 : MaxCell_TileMatrix_6_chr6, Class = integer
+
+MaxCell_TileMatrix_6_chr6: length = 1
+[1] 555365
+
+
+2024-04-17 14:00:16 : Adding TileMatrix to Sample_BCG_h1 for Chr (7 of 24)!, 1.42 mins elapsed.
+
+2024-04-17 14:00:18 : NTiles_TileMatrix_7_chr7, Class = numeric
+
+NTiles_TileMatrix_7_chr7: length = 1
+  chr7 
+318692 
+
+
+
+2024-04-17 14:00:18 : NCells_TileMatrix_7_chr7, Class = integer
+
+NCells_TileMatrix_7_chr7: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:18 : MinTile_TileMatrix_7_chr7, Class = numeric
+
+MinTile_TileMatrix_7_chr7: length = 1
+[1] 21
+
+
+
+2024-04-17 14:00:18 : MaxTile_TileMatrix_7_chr7, Class = numeric
+
+MaxTile_TileMatrix_7_chr7: length = 1
+[1] 318672
+
+
+
+2024-04-17 14:00:18 : MinCell_TileMatrix_7_chr7, Class = integer
+
+MinCell_TileMatrix_7_chr7: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:18 : MaxCell_TileMatrix_7_chr7, Class = integer
+
+MaxCell_TileMatrix_7_chr7: length = 1
+[1] 562106
+
+
+2024-04-17 14:00:25 : Adding TileMatrix to Sample_BCG_h1 for Chr (8 of 24)!, 1.575 mins elapsed.
+
+2024-04-17 14:00:27 : NTiles_TileMatrix_8_chr8, Class = numeric
+
+NTiles_TileMatrix_8_chr8: length = 1
+  chr8 
+290278 
+
+
+
+2024-04-17 14:00:27 : NCells_TileMatrix_8_chr8, Class = integer
+
+NCells_TileMatrix_8_chr8: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:27 : MinTile_TileMatrix_8_chr8, Class = numeric
+
+MinTile_TileMatrix_8_chr8: length = 1
+[1] 124
+
+
+
+2024-04-17 14:00:27 : MaxTile_TileMatrix_8_chr8, Class = numeric
+
+MaxTile_TileMatrix_8_chr8: length = 1
+[1] 290158
+
+
+
+2024-04-17 14:00:27 : MinCell_TileMatrix_8_chr8, Class = integer
+
+MinCell_TileMatrix_8_chr8: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:27 : MaxCell_TileMatrix_8_chr8, Class = integer
+
+MaxCell_TileMatrix_8_chr8: length = 1
+[1] 568020
+
+
+2024-04-17 14:00:33 : Adding TileMatrix to Sample_BCG_h1 for Chr (9 of 24)!, 1.715 mins elapsed.
+
+2024-04-17 14:00:35 : NTiles_TileMatrix_9_chr9, Class = numeric
+
+NTiles_TileMatrix_9_chr9: length = 1
+  chr9 
+276790 
+
+
+
+2024-04-17 14:00:35 : NCells_TileMatrix_9_chr9, Class = integer
+
+NCells_TileMatrix_9_chr9: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:35 : MinTile_TileMatrix_9_chr9, Class = numeric
+
+MinTile_TileMatrix_9_chr9: length = 1
+[1] 21
+
+
+
+2024-04-17 14:00:35 : MaxTile_TileMatrix_9_chr9, Class = numeric
+
+MaxTile_TileMatrix_9_chr9: length = 1
+[1] 276637
+
+
+
+2024-04-17 14:00:35 : MinCell_TileMatrix_9_chr9, Class = integer
+
+MinCell_TileMatrix_9_chr9: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:35 : MaxCell_TileMatrix_9_chr9, Class = integer
+
+MaxCell_TileMatrix_9_chr9: length = 1
+[1] 573535
+
+
+2024-04-17 14:00:41 : Adding TileMatrix to Sample_BCG_h1 for Chr (10 of 24)!, 1.844 mins elapsed.
+
+2024-04-17 14:00:43 : NTiles_TileMatrix_10_chr10, Class = numeric
+
+NTiles_TileMatrix_10_chr10: length = 1
+ chr10 
+267595 
+
+
+
+2024-04-17 14:00:43 : NCells_TileMatrix_10_chr10, Class = integer
+
+NCells_TileMatrix_10_chr10: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:43 : MinTile_TileMatrix_10_chr10, Class = numeric
+
+MinTile_TileMatrix_10_chr10: length = 1
+[1] 21
+
+
+
+2024-04-17 14:00:43 : MaxTile_TileMatrix_10_chr10, Class = numeric
+
+MaxTile_TileMatrix_10_chr10: length = 1
+[1] 267575
+
+
+
+2024-04-17 14:00:43 : MinCell_TileMatrix_10_chr10, Class = integer
+
+MinCell_TileMatrix_10_chr10: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:43 : MaxCell_TileMatrix_10_chr10, Class = integer
+
+MaxCell_TileMatrix_10_chr10: length = 1
+[1] 464345
+
+
+2024-04-17 14:00:50 : Adding TileMatrix to Sample_BCG_h1 for Chr (11 of 24)!, 1.983 mins elapsed.
+
+2024-04-17 14:00:52 : NTiles_TileMatrix_11_chr11, Class = numeric
+
+NTiles_TileMatrix_11_chr11: length = 1
+ chr11 
+270174 
+
+
+
+2024-04-17 14:00:52 : NCells_TileMatrix_11_chr11, Class = integer
+
+NCells_TileMatrix_11_chr11: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:00:52 : MinTile_TileMatrix_11_chr11, Class = numeric
+
+MinTile_TileMatrix_11_chr11: length = 1
+[1] 146
+
+
+
+2024-04-17 14:00:52 : MaxTile_TileMatrix_11_chr11, Class = numeric
+
+MaxTile_TileMatrix_11_chr11: length = 1
+[1] 270154
+
+
+
+2024-04-17 14:00:52 : MinCell_TileMatrix_11_chr11, Class = integer
+
+MinCell_TileMatrix_11_chr11: length = 1
+[1] 1
+
+
+
+2024-04-17 14:00:52 : MaxCell_TileMatrix_11_chr11, Class = integer
+
+MaxCell_TileMatrix_11_chr11: length = 1
+[1] 471052
+
+
+2024-04-17 14:00:59 : Adding TileMatrix to Sample_BCG_h1 for Chr (12 of 24)!, 2.133 mins elapsed.
+
+2024-04-17 14:01:01 : NTiles_TileMatrix_12_chr12, Class = numeric
+
+NTiles_TileMatrix_12_chr12: length = 1
+ chr12 
+266551 
+
+
+
+2024-04-17 14:01:01 : NCells_TileMatrix_12_chr12, Class = integer
+
+NCells_TileMatrix_12_chr12: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:01 : MinTile_TileMatrix_12_chr12, Class = numeric
+
+MinTile_TileMatrix_12_chr12: length = 1
+[1] 21
+
+
+
+2024-04-17 14:01:01 : MaxTile_TileMatrix_12_chr12, Class = numeric
+
+MaxTile_TileMatrix_12_chr12: length = 1
+[1] 266530
+
+
+
+2024-04-17 14:01:01 : MinCell_TileMatrix_12_chr12, Class = integer
+
+MinCell_TileMatrix_12_chr12: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:01 : MaxCell_TileMatrix_12_chr12, Class = integer
+
+MaxCell_TileMatrix_12_chr12: length = 1
+[1] 477456
+
+
+2024-04-17 14:01:07 : Adding TileMatrix to Sample_BCG_h1 for Chr (13 of 24)!, 2.28 mins elapsed.
+
+2024-04-17 14:01:09 : NTiles_TileMatrix_13_chr13, Class = numeric
+
+NTiles_TileMatrix_13_chr13: length = 1
+ chr13 
+228729 
+
+
+
+2024-04-17 14:01:09 : NCells_TileMatrix_13_chr13, Class = integer
+
+NCells_TileMatrix_13_chr13: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:09 : MinTile_TileMatrix_13_chr13, Class = numeric
+
+MinTile_TileMatrix_13_chr13: length = 1
+[1] 32226
+
+
+
+2024-04-17 14:01:09 : MaxTile_TileMatrix_13_chr13, Class = numeric
+
+MaxTile_TileMatrix_13_chr13: length = 1
+[1] 228709
+
+
+
+2024-04-17 14:01:09 : MinCell_TileMatrix_13_chr13, Class = integer
+
+MinCell_TileMatrix_13_chr13: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:09 : MaxCell_TileMatrix_13_chr13, Class = integer
+
+MaxCell_TileMatrix_13_chr13: length = 1
+[1] 481001
+
+
+2024-04-17 14:01:13 : Adding TileMatrix to Sample_BCG_h1 for Chr (14 of 24)!, 2.381 mins elapsed.
+
+2024-04-17 14:01:15 : NTiles_TileMatrix_14_chr14, Class = numeric
+
+NTiles_TileMatrix_14_chr14: length = 1
+ chr14 
+214088 
+
+
+
+2024-04-17 14:01:15 : NCells_TileMatrix_14_chr14, Class = integer
+
+NCells_TileMatrix_14_chr14: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:15 : MinTile_TileMatrix_14_chr14, Class = numeric
+
+MinTile_TileMatrix_14_chr14: length = 1
+[1] 32046
+
+
+
+2024-04-17 14:01:15 : MaxTile_TileMatrix_14_chr14, Class = numeric
+
+MaxTile_TileMatrix_14_chr14: length = 1
+[1] 213768
+
+
+
+2024-04-17 14:01:15 : MinCell_TileMatrix_14_chr14, Class = integer
+
+MinCell_TileMatrix_14_chr14: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:15 : MaxCell_TileMatrix_14_chr14, Class = integer
+
+MaxCell_TileMatrix_14_chr14: length = 1
+[1] 485305
+
+
+2024-04-17 14:01:20 : Adding TileMatrix to Sample_BCG_h1 for Chr (15 of 24)!, 2.494 mins elapsed.
+
+2024-04-17 14:01:21 : NTiles_TileMatrix_15_chr15, Class = numeric
+
+NTiles_TileMatrix_15_chr15: length = 1
+ chr15 
+203983 
+
+
+
+2024-04-17 14:01:21 : NCells_TileMatrix_15_chr15, Class = integer
+
+NCells_TileMatrix_15_chr15: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:21 : MinTile_TileMatrix_15_chr15, Class = numeric
+
+MinTile_TileMatrix_15_chr15: length = 1
+[1] 34019
+
+
+
+2024-04-17 14:01:21 : MaxTile_TileMatrix_15_chr15, Class = numeric
+
+MaxTile_TileMatrix_15_chr15: length = 1
+[1] 203963
+
+
+
+2024-04-17 14:01:22 : MinCell_TileMatrix_15_chr15, Class = integer
+
+MinCell_TileMatrix_15_chr15: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:22 : MaxCell_TileMatrix_15_chr15, Class = integer
+
+MaxCell_TileMatrix_15_chr15: length = 1
+[1] 489293
+
+
+2024-04-17 14:01:27 : Adding TileMatrix to Sample_BCG_h1 for Chr (16 of 24)!, 2.601 mins elapsed.
+
+2024-04-17 14:01:28 : NTiles_TileMatrix_16_chr16, Class = numeric
+
+NTiles_TileMatrix_16_chr16: length = 1
+ chr16 
+180677 
+
+
+
+2024-04-17 14:01:28 : NCells_TileMatrix_16_chr16, Class = integer
+
+NCells_TileMatrix_16_chr16: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:28 : MinTile_TileMatrix_16_chr16, Class = numeric
+
+MinTile_TileMatrix_16_chr16: length = 1
+[1] 20
+
+
+
+2024-04-17 14:01:28 : MaxTile_TileMatrix_16_chr16, Class = numeric
+
+MaxTile_TileMatrix_16_chr16: length = 1
+[1] 180453
+
+
+
+2024-04-17 14:01:28 : MinCell_TileMatrix_16_chr16, Class = integer
+
+MinCell_TileMatrix_16_chr16: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:28 : MaxCell_TileMatrix_16_chr16, Class = integer
+
+MaxCell_TileMatrix_16_chr16: length = 1
+[1] 494020
+
+
+2024-04-17 14:01:33 : Adding TileMatrix to Sample_BCG_h1 for Chr (17 of 24)!, 2.713 mins elapsed.
+
+2024-04-17 14:01:35 : NTiles_TileMatrix_17_chr17, Class = numeric
+
+NTiles_TileMatrix_17_chr17: length = 1
+ chr17 
+166515 
+
+
+
+2024-04-17 14:01:35 : NCells_TileMatrix_17_chr17, Class = integer
+
+NCells_TileMatrix_17_chr17: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:35 : MinTile_TileMatrix_17_chr17, Class = numeric
+
+MinTile_TileMatrix_17_chr17: length = 1
+[1] 146
+
+
+
+2024-04-17 14:01:35 : MaxTile_TileMatrix_17_chr17, Class = numeric
+
+MaxTile_TileMatrix_17_chr17: length = 1
+[1] 166495
+
+
+
+2024-04-17 14:01:35 : MinCell_TileMatrix_17_chr17, Class = integer
+
+MinCell_TileMatrix_17_chr17: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:35 : MaxCell_TileMatrix_17_chr17, Class = integer
+
+MaxCell_TileMatrix_17_chr17: length = 1
+[1] 499560
+
+
+2024-04-17 14:01:41 : Adding TileMatrix to Sample_BCG_h1 for Chr (18 of 24)!, 2.836 mins elapsed.
+
+2024-04-17 14:01:42 : NTiles_TileMatrix_18_chr18, Class = numeric
+
+NTiles_TileMatrix_18_chr18: length = 1
+ chr18 
+160747 
+
+
+
+2024-04-17 14:01:42 : NCells_TileMatrix_18_chr18, Class = integer
+
+NCells_TileMatrix_18_chr18: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:42 : MinTile_TileMatrix_18_chr18, Class = numeric
+
+MinTile_TileMatrix_18_chr18: length = 1
+[1] 21
+
+
+
+2024-04-17 14:01:42 : MaxTile_TileMatrix_18_chr18, Class = numeric
+
+MaxTile_TileMatrix_18_chr18: length = 1
+[1] 160527
+
+
+
+2024-04-17 14:01:42 : MinCell_TileMatrix_18_chr18, Class = integer
+
+MinCell_TileMatrix_18_chr18: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:42 : MaxCell_TileMatrix_18_chr18, Class = integer
+
+MaxCell_TileMatrix_18_chr18: length = 1
+[1] 502649
+
+
+2024-04-17 14:01:46 : Adding TileMatrix to Sample_BCG_h1 for Chr (19 of 24)!, 2.928 mins elapsed.
+
+2024-04-17 14:01:48 : NTiles_TileMatrix_19_chr19, Class = numeric
+
+NTiles_TileMatrix_19_chr19: length = 1
+ chr19 
+117236 
+
+
+
+2024-04-17 14:01:48 : NCells_TileMatrix_19_chr19, Class = integer
+
+NCells_TileMatrix_19_chr19: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:48 : MinTile_TileMatrix_19_chr19, Class = numeric
+
+MinTile_TileMatrix_19_chr19: length = 1
+[1] 123
+
+
+
+2024-04-17 14:01:48 : MaxTile_TileMatrix_19_chr19, Class = numeric
+
+MaxTile_TileMatrix_19_chr19: length = 1
+[1] 117216
+
+
+
+2024-04-17 14:01:48 : MinCell_TileMatrix_19_chr19, Class = integer
+
+MinCell_TileMatrix_19_chr19: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:48 : MaxCell_TileMatrix_19_chr19, Class = integer
+
+MaxCell_TileMatrix_19_chr19: length = 1
+[1] 508034
+
+
+2024-04-17 14:01:54 : Adding TileMatrix to Sample_BCG_h1 for Chr (20 of 24)!, 3.055 mins elapsed.
+
+2024-04-17 14:01:55 : NTiles_TileMatrix_20_chr20, Class = numeric
+
+NTiles_TileMatrix_20_chr20: length = 1
+ chr20 
+128889 
+
+
+
+2024-04-17 14:01:55 : NCells_TileMatrix_20_chr20, Class = integer
+
+NCells_TileMatrix_20_chr20: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:01:55 : MinTile_TileMatrix_20_chr20, Class = numeric
+
+MinTile_TileMatrix_20_chr20: length = 1
+[1] 121
+
+
+
+2024-04-17 14:01:55 : MaxTile_TileMatrix_20_chr20, Class = numeric
+
+MaxTile_TileMatrix_20_chr20: length = 1
+[1] 128669
+
+
+
+2024-04-17 14:01:55 : MinCell_TileMatrix_20_chr20, Class = integer
+
+MinCell_TileMatrix_20_chr20: length = 1
+[1] 1
+
+
+
+2024-04-17 14:01:55 : MaxCell_TileMatrix_20_chr20, Class = integer
+
+MaxCell_TileMatrix_20_chr20: length = 1
+[1] 521800
+
+
+2024-04-17 14:02:00 : Adding TileMatrix to Sample_BCG_h1 for Chr (21 of 24)!, 3.15 mins elapsed.
+
+2024-04-17 14:02:00 : NTiles_TileMatrix_21_chr21, Class = numeric
+
+NTiles_TileMatrix_21_chr21: length = 1
+chr21 
+93420 
+
+
+
+2024-04-17 14:02:00 : NCells_TileMatrix_21_chr21, Class = integer
+
+NCells_TileMatrix_21_chr21: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:02:00 : MinTile_TileMatrix_21_chr21, Class = numeric
+
+MinTile_TileMatrix_21_chr21: length = 1
+[1] 10062
+
+
+
+2024-04-17 14:02:00 : MaxTile_TileMatrix_21_chr21, Class = numeric
+
+MaxTile_TileMatrix_21_chr21: length = 1
+[1] 93400
+
+
+
+2024-04-17 14:02:00 : MinCell_TileMatrix_21_chr21, Class = integer
+
+MinCell_TileMatrix_21_chr21: length = 1
+[1] 1
+
+
+
+2024-04-17 14:02:00 : MaxCell_TileMatrix_21_chr21, Class = integer
+
+MaxCell_TileMatrix_21_chr21: length = 1
+[1] 523324
+
+
+2024-04-17 14:02:04 : Adding TileMatrix to Sample_BCG_h1 for Chr (22 of 24)!, 3.219 mins elapsed.
+
+2024-04-17 14:02:04 : NTiles_TileMatrix_22_chr22, Class = numeric
+
+NTiles_TileMatrix_22_chr22: length = 1
+ chr22 
+101637 
+
+
+
+2024-04-17 14:02:04 : NCells_TileMatrix_22_chr22, Class = integer
+
+NCells_TileMatrix_22_chr22: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:02:04 : MinTile_TileMatrix_22_chr22, Class = numeric
+
+MinTile_TileMatrix_22_chr22: length = 1
+[1] 21033
+
+
+
+2024-04-17 14:02:04 : MaxTile_TileMatrix_22_chr22, Class = numeric
+
+MaxTile_TileMatrix_22_chr22: length = 1
+[1] 101617
+
+
+
+2024-04-17 14:02:05 : MinCell_TileMatrix_22_chr22, Class = integer
+
+MinCell_TileMatrix_22_chr22: length = 1
+[1] 1
+
+
+
+2024-04-17 14:02:05 : MaxCell_TileMatrix_22_chr22, Class = integer
+
+MaxCell_TileMatrix_22_chr22: length = 1
+[1] 525749
+
+
+2024-04-17 14:02:08 : Adding TileMatrix to Sample_BCG_h1 for Chr (23 of 24)!, 3.299 mins elapsed.
+
+2024-04-17 14:02:10 : NTiles_TileMatrix_23_chrX, Class = numeric
+
+NTiles_TileMatrix_23_chrX: length = 1
+  chrX 
+312082 
+
+
+
+2024-04-17 14:02:10 : NCells_TileMatrix_23_chrX, Class = integer
+
+NCells_TileMatrix_23_chrX: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:02:10 : MinTile_TileMatrix_23_chrX, Class = numeric
+
+MinTile_TileMatrix_23_chrX: length = 1
+[1] 21
+
+
+
+2024-04-17 14:02:10 : MaxTile_TileMatrix_23_chrX, Class = numeric
+
+MaxTile_TileMatrix_23_chrX: length = 1
+[1] 312062
+
+
+
+2024-04-17 14:02:10 : MinCell_TileMatrix_23_chrX, Class = integer
+
+MinCell_TileMatrix_23_chrX: length = 1
+[1] 1
+
+
+
+2024-04-17 14:02:10 : MaxCell_TileMatrix_23_chrX, Class = integer
+
+MaxCell_TileMatrix_23_chrX: length = 1
+[1] 576756
+
+
+2024-04-17 14:02:14 : Adding TileMatrix to Sample_BCG_h1 for Chr (24 of 24)!, 3.395 mins elapsed.
+
+2024-04-17 14:02:14 : NTiles_TileMatrix_24_chrY, Class = numeric
+
+NTiles_TileMatrix_24_chrY: length = 1
+  chrY 
+114455 
+
+
+
+2024-04-17 14:02:14 : NCells_TileMatrix_24_chrY, Class = integer
+
+NCells_TileMatrix_24_chrY: length = 1
+[1] 576959
+
+
+
+2024-04-17 14:02:14 : MinTile_TileMatrix_24_chrY, Class = numeric
+
+MinTile_TileMatrix_24_chrY: length = 1
+[1] 5563
+
+
+
+2024-04-17 14:02:14 : MaxTile_TileMatrix_24_chrY, Class = numeric
+
+MaxTile_TileMatrix_24_chrY: length = 1
+[1] 113775
+
+
+
+2024-04-17 14:02:14 : MinCell_TileMatrix_24_chrY, Class = integer
+
+MinCell_TileMatrix_24_chrY: length = 1
+[1] 1
+
+
+
+2024-04-17 14:02:14 : MaxCell_TileMatrix_24_chrY, Class = integer
+
+MaxCell_TileMatrix_24_chrY: length = 1
+[1] 576959
+
+
+2024-04-17 14:02:18 : (Sample_BCG_h1 : 1 of 1) Finished Adding TileMatrix!, 9.871 mins elapsed.
+2024-04-17 14:02:18 : (Sample_BCG_h1 : 1 of 1) Finished Creating Arrow File, 9.871 mins elapsed.
+
+------- Completed
+
+End Time : 2024-04-17 14:02:18
+Elapsed Time Minutes = 9.8739130616188
+Elapsed Time Hours = 0.164565431343185
+
+-------
+
+
+

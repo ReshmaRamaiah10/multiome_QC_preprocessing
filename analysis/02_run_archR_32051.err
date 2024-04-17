@@ -1,0 +1,474 @@
+Loading required package: ggplot2
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+    Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘Biobase’
+
+The following object is masked from ‘package:MatrixGenerics’:
+
+    rowMedians
+
+The following objects are masked from ‘package:matrixStats’:
+
+    anyMissing, rowMedians
+
+Loading required package: data.table
+
+Attaching package: ‘data.table’
+
+The following object is masked from ‘package:SummarizedExperiment’:
+
+    shift
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+The following object is masked from ‘package:IRanges’:
+
+    shift
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, second
+
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Loading required package: rhdf5
+Loading required package: magrittr
+
+Attaching package: ‘magrittr’
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    subtract
+
+Setting default number of Parallel threads to 25.
+Setting default genome to Hg38.
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+ArchR logging to : ArchRLogs/ArchR-createArrows-a9323120dd8f-Date-2024-04-17_Time-13-52-26.log
+If there is an issue, please report to github with logFile!
+2024-04-17 13:52:26 : Batch Execution w/ safelapply!, 0 mins elapsed.
+2024-04-17 13:52:26 : (Sample_BCG_h1 : 1 of 1) Reading In Fragments from inputFiles (readMethod = tabix), 0 mins elapsed.
+2024-04-17 13:52:26 : (Sample_BCG_h1 : 1 of 1) Tabix Bed To Temporary File, 0.001 mins elapsed.
+2024-04-17 13:53:13 : (Sample_BCG_h1 : 1 of 1) Reading TabixFile 42 Percent, 0.787 mins elapsed.
+2024-04-17 13:53:50 : (Sample_BCG_h1 : 1 of 1) Reading TabixFile 85 Percent, 1.402 mins elapsed.
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) Successful creation of Temporary File, 1.672 mins elapsed.
+2024-04-17 13:54:06 : (Sample_BCG_h1 : 1 of 1) Creating ArrowFile From Temporary File, 1.673 mins elapsed.
+2024-04-17 13:54:56 : (Sample_BCG_h1 : 1 of 1) Successful creation of Arrow File, 2.514 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Number of Cells Pass Filter = 576959 , 3.935 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Median Frags = 3 , 3.935 mins elapsed.
+2024-04-17 13:56:22 : (Sample_BCG_h1 : 1 of 1) CellStats : Median TSS Enrichment = 0 , 3.935 mins elapsed.
+2024-04-17 13:56:48 : (Sample_BCG_h1 : 1 of 1) Adding Additional Feature Counts!, 4.38 mins elapsed.
+2024-04-17 13:57:11 : (Sample_BCG_h1 : 1 of 1) Removing Fragments from Filtered Cells, 4.757 mins elapsed.
+2024-04-17 13:57:11 : (Sample_BCG_h1 : 1 of 1) Creating Filtered Arrow File, 4.757 mins elapsed.
+2024-04-17 13:58:48 : (Sample_BCG_h1 : 1 of 1) Finished Constructing Filtered Arrow File!, 6.372 mins elapsed.
+2024-04-17 13:58:51 : (Sample_BCG_h1 : 1 of 1) Adding TileMatrix!, 6.415 mins elapsed.
+2024-04-17 14:02:18 : (Sample_BCG_h1 : 1 of 1) Finished Creating Arrow File, 9.871 mins elapsed.
+ArchR logging successful to : ArchRLogs/ArchR-createArrows-a9323120dd8f-Date-2024-04-17_Time-13-52-26.log
+Setting default number of Parallel threads to 1.
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Validating Arrows...
+Getting SampleNames...
+1 
+Getting Cell Metadata...
+1 
+Merging Cell Metadata...
+Initializing ArchRProject...
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Copying Arrow Files...
+Copying Arrow Files (1 of 1)
+Saving ArchRProject...
+Loading ArchRProject...
+Successfully loaded ArchRProject!
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+ArchR logging to : ArchRLogs/ArchR-createArrows-a93242ceea7e-Date-2024-04-17_Time-14-02-34.log
+If there is an issue, please report to github with logFile!
+2024-04-17 14:02:34 : Batch Execution w/ safelapply!, 0 mins elapsed.
+2024-04-17 14:02:34 : (Sample_BCG_h2 : 1 of 1) Reading In Fragments from inputFiles (readMethod = tabix), 0 mins elapsed.
+2024-04-17 14:02:34 : (Sample_BCG_h2 : 1 of 1) Tabix Bed To Temporary File, 0.001 mins elapsed.
+2024-04-17 14:03:31 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 8 Percent, 0.951 mins elapsed.
+2024-04-17 14:04:17 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 17 Percent, 1.713 mins elapsed.
+2024-04-17 14:04:57 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 25 Percent, 2.391 mins elapsed.
+2024-04-17 14:05:33 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 33 Percent, 2.989 mins elapsed.
+2024-04-17 14:06:07 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 42 Percent, 3.549 mins elapsed.
+2024-04-17 14:06:43 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 50 Percent, 4.158 mins elapsed.
+2024-04-17 14:07:09 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 58 Percent, 4.588 mins elapsed.
+2024-04-17 14:07:36 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 67 Percent, 5.031 mins elapsed.
+2024-04-17 14:08:03 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 75 Percent, 5.483 mins elapsed.
+2024-04-17 14:08:30 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 83 Percent, 5.931 mins elapsed.
+2024-04-17 14:08:45 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 92 Percent, 6.18 mins elapsed.
+2024-04-17 14:09:03 : (Sample_BCG_h2 : 1 of 1) Reading TabixFile 100 Percent, 6.48 mins elapsed.
+2024-04-17 14:09:03 : (Sample_BCG_h2 : 1 of 1) Successful creation of Temporary File, 6.492 mins elapsed.
+2024-04-17 14:09:03 : (Sample_BCG_h2 : 1 of 1) Creating ArrowFile From Temporary File, 6.492 mins elapsed.
+2024-04-17 14:10:53 : (Sample_BCG_h2 : 1 of 1) Successful creation of Arrow File, 8.323 mins elapsed.
+2024-04-17 14:13:12 : (Sample_BCG_h2 : 1 of 1) CellStats : Number of Cells Pass Filter = 491034 , 10.629 mins elapsed.
+2024-04-17 14:13:12 : (Sample_BCG_h2 : 1 of 1) CellStats : Median Frags = 2 , 10.629 mins elapsed.
+2024-04-17 14:13:12 : (Sample_BCG_h2 : 1 of 1) CellStats : Median TSS Enrichment = 0 , 10.629 mins elapsed.
+2024-04-17 14:13:32 : (Sample_BCG_h2 : 1 of 1) Adding Additional Feature Counts!, 10.967 mins elapsed.
+2024-04-17 14:15:14 : (Sample_BCG_h2 : 1 of 1) Removing Fragments from Filtered Cells, 12.668 mins elapsed.
+2024-04-17 14:15:14 : (Sample_BCG_h2 : 1 of 1) Creating Filtered Arrow File, 12.668 mins elapsed.
+2024-04-17 14:16:06 : (Sample_BCG_h2 : 1 of 1) Finished Constructing Filtered Arrow File!, 13.542 mins elapsed.
+2024-04-17 14:16:09 : (Sample_BCG_h2 : 1 of 1) Adding TileMatrix!, 13.579 mins elapsed.
+2024-04-17 14:18:21 : (Sample_BCG_h2 : 1 of 1) Finished Creating Arrow File, 15.782 mins elapsed.
+ArchR logging successful to : ArchRLogs/ArchR-createArrows-a93242ceea7e-Date-2024-04-17_Time-14-02-34.log
+Setting default number of Parallel threads to 1.
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Validating Arrows...
+Getting SampleNames...
+1 
+Getting Cell Metadata...
+1 
+Merging Cell Metadata...
+Initializing ArchRProject...
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Copying Arrow Files...
+Copying Arrow Files (1 of 1)
+Saving ArchRProject...
+Loading ArchRProject...
+Successfully loaded ArchRProject!
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+ArchR logging to : ArchRLogs/ArchR-createArrows-a932715c0d7e-Date-2024-04-17_Time-14-18-34.log
+If there is an issue, please report to github with logFile!
+2024-04-17 14:18:34 : Batch Execution w/ safelapply!, 0 mins elapsed.
+2024-04-17 14:18:34 : (Sample_BCG_h3 : 1 of 1) Reading In Fragments from inputFiles (readMethod = tabix), 0 mins elapsed.
+2024-04-17 14:18:34 : (Sample_BCG_h3 : 1 of 1) Tabix Bed To Temporary File, 0 mins elapsed.
+2024-04-17 14:22:02 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 8 Percent, 3.457 mins elapsed.
+2024-04-17 14:24:55 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 17 Percent, 6.347 mins elapsed.
+2024-04-17 14:27:23 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 25 Percent, 8.808 mins elapsed.
+2024-04-17 14:29:29 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 33 Percent, 10.92 mins elapsed.
+2024-04-17 14:31:19 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 42 Percent, 12.742 mins elapsed.
+2024-04-17 14:33:15 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 50 Percent, 14.671 mins elapsed.
+2024-04-17 14:34:33 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 58 Percent, 15.983 mins elapsed.
+2024-04-17 14:35:47 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 67 Percent, 17.209 mins elapsed.
+2024-04-17 14:36:59 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 75 Percent, 18.405 mins elapsed.
+2024-04-17 14:37:58 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 83 Percent, 19.398 mins elapsed.
+2024-04-17 14:38:35 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 92 Percent, 20.005 mins elapsed.
+2024-04-17 14:39:18 : (Sample_BCG_h3 : 1 of 1) Reading TabixFile 100 Percent, 20.732 mins elapsed.
+2024-04-17 14:39:19 : (Sample_BCG_h3 : 1 of 1) Successful creation of Temporary File, 20.748 mins elapsed.
+2024-04-17 14:39:19 : (Sample_BCG_h3 : 1 of 1) Creating ArrowFile From Temporary File, 20.748 mins elapsed.
+2024-04-17 14:44:35 : (Sample_BCG_h3 : 1 of 1) Successful creation of Arrow File, 26.005 mins elapsed.
+2024-04-17 14:50:25 : (Sample_BCG_h3 : 1 of 1) CellStats : Number of Cells Pass Filter = 649415 , 31.84 mins elapsed.
+2024-04-17 14:50:25 : (Sample_BCG_h3 : 1 of 1) CellStats : Median Frags = 5 , 31.84 mins elapsed.
+2024-04-17 14:50:25 : (Sample_BCG_h3 : 1 of 1) CellStats : Median TSS Enrichment = 0 , 31.841 mins elapsed.
+2024-04-17 14:50:54 : (Sample_BCG_h3 : 1 of 1) Adding Additional Feature Counts!, 32.334 mins elapsed.
+2024-04-17 14:54:26 : (Sample_BCG_h3 : 1 of 1) Removing Fragments from Filtered Cells, 35.866 mins elapsed.
+2024-04-17 14:54:26 : (Sample_BCG_h3 : 1 of 1) Creating Filtered Arrow File, 35.867 mins elapsed.
+2024-04-17 14:57:00 : (Sample_BCG_h3 : 1 of 1) Finished Constructing Filtered Arrow File!, 38.424 mins elapsed.
+2024-04-17 14:57:02 : (Sample_BCG_h3 : 1 of 1) Adding TileMatrix!, 38.469 mins elapsed.
+2024-04-17 15:02:00 : (Sample_BCG_h3 : 1 of 1) Finished Creating Arrow File, 43.435 mins elapsed.
+ArchR logging successful to : ArchRLogs/ArchR-createArrows-a932715c0d7e-Date-2024-04-17_Time-14-18-34.log
+Setting default number of Parallel threads to 1.
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Validating Arrows...
+Getting SampleNames...
+1 
+Getting Cell Metadata...
+1 
+Merging Cell Metadata...
+Initializing ArchRProject...
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Copying Arrow Files...
+Copying Arrow Files (1 of 1)
+Saving ArchRProject...
+Loading ArchRProject...
+Successfully loaded ArchRProject!
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+ArchR logging to : ArchRLogs/ArchR-createArrows-a932209e6217-Date-2024-04-17_Time-15-02-19.log
+If there is an issue, please report to github with logFile!
+2024-04-17 15:02:19 : Batch Execution w/ safelapply!, 0 mins elapsed.
+2024-04-17 15:02:19 : (Sample_BCG_h4 : 1 of 1) Reading In Fragments from inputFiles (readMethod = tabix), 0 mins elapsed.
+2024-04-17 15:02:19 : (Sample_BCG_h4 : 1 of 1) Tabix Bed To Temporary File, 0 mins elapsed.
+2024-04-17 15:03:33 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 8 Percent, 1.244 mins elapsed.
+2024-04-17 15:04:37 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 17 Percent, 2.296 mins elapsed.
+2024-04-17 15:05:32 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 25 Percent, 3.217 mins elapsed.
+2024-04-17 15:06:22 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 33 Percent, 4.05 mins elapsed.
+2024-04-17 15:07:06 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 42 Percent, 4.785 mins elapsed.
+2024-04-17 15:07:54 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 50 Percent, 5.583 mins elapsed.
+2024-04-17 15:08:28 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 58 Percent, 6.162 mins elapsed.
+2024-04-17 15:09:03 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 67 Percent, 6.735 mins elapsed.
+2024-04-17 15:09:37 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 75 Percent, 7.31 mins elapsed.
+2024-04-17 15:10:10 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 83 Percent, 7.856 mins elapsed.
+2024-04-17 15:10:29 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 92 Percent, 8.174 mins elapsed.
+2024-04-17 15:10:54 : (Sample_BCG_h4 : 1 of 1) Reading TabixFile 100 Percent, 8.583 mins elapsed.
+2024-04-17 15:10:55 : (Sample_BCG_h4 : 1 of 1) Successful creation of Temporary File, 8.597 mins elapsed.
+2024-04-17 15:10:55 : (Sample_BCG_h4 : 1 of 1) Creating ArrowFile From Temporary File, 8.597 mins elapsed.
+2024-04-17 15:13:21 : (Sample_BCG_h4 : 1 of 1) Successful creation of Arrow File, 11.044 mins elapsed.
+2024-04-17 15:16:21 : (Sample_BCG_h4 : 1 of 1) CellStats : Number of Cells Pass Filter = 561570 , 14.045 mins elapsed.
+2024-04-17 15:16:21 : (Sample_BCG_h4 : 1 of 1) CellStats : Median Frags = 3 , 14.045 mins elapsed.
+2024-04-17 15:16:21 : (Sample_BCG_h4 : 1 of 1) CellStats : Median TSS Enrichment = 0 , 14.045 mins elapsed.
+2024-04-17 15:16:46 : (Sample_BCG_h4 : 1 of 1) Adding Additional Feature Counts!, 14.454 mins elapsed.
+2024-04-17 15:18:54 : (Sample_BCG_h4 : 1 of 1) Removing Fragments from Filtered Cells, 16.58 mins elapsed.
+2024-04-17 15:18:54 : (Sample_BCG_h4 : 1 of 1) Creating Filtered Arrow File, 16.581 mins elapsed.
+2024-04-17 15:20:03 : (Sample_BCG_h4 : 1 of 1) Finished Constructing Filtered Arrow File!, 17.745 mins elapsed.
+2024-04-17 15:20:06 : (Sample_BCG_h4 : 1 of 1) Adding TileMatrix!, 17.79 mins elapsed.
+2024-04-17 15:22:50 : (Sample_BCG_h4 : 1 of 1) Finished Creating Arrow File, 20.522 mins elapsed.
+ArchR logging successful to : ArchRLogs/ArchR-createArrows-a932209e6217-Date-2024-04-17_Time-15-02-19.log
+Setting default number of Parallel threads to 1.
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Using GeneAnnotation set by addArchRGenome(Hg38)!
+Validating Arrows...
+Getting SampleNames...
+1 
+Getting Cell Metadata...
+1 
+Merging Cell Metadata...
+Initializing ArchRProject...
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Copying Arrow Files...
+Copying Arrow Files (1 of 1)
+Saving ArchRProject...
+Loading ArchRProject...
+Successfully loaded ArchRProject!
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+There were 40 warnings (use warnings() to see them)
