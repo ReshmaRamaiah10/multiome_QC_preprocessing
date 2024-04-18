@@ -18,3 +18,13 @@ results/Sample_BCG_h1/pre_filt_rna_adata.h5ad
 results/Sample_BCG_h1/cr_filt_rna_adata.h5ad
 results/Sample_BCG_h2/pre_filt_rna_adata.h5ad
 results/Sample_BCG_h2/cr_filt_rna_adata.h5ad
+results/Sample_BCG_h1/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h1/cr_filt_rna_adata.h5ad
+results/Sample_BCG_h1/ArchR/Sample_BCG_h1.arrow
+results/Sample_BCG_h1/ArchR/pre_filt/ArrowFiles/Sample_BCG_h1.arrow
+results/Sample_BCG_h1/ArchR/cr_filt/ArrowFiles/Sample_BCG_h1.arrow
+results/Sample_BCG_h2/pre_filt_rna_adata.h5ad
+results/Sample_BCG_h2/cr_filt_rna_adata.h5ad
+results/Sample_BCG_h2/ArchR/Sample_BCG_h2.arrow
+results/Sample_BCG_h2/ArchR/pre_filt/ArrowFiles/Sample_BCG_h2.arrow
+results/Sample_BCG_h2/ArchR/cr_filt/ArrowFiles/Sample_BCG_h2.arrow
