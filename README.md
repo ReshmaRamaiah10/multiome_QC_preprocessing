@@ -8,10 +8,16 @@ Before running the workflow:
 RIBO_GENE_PATH = '/data/niecr/ramaiar/multiome_lucyrepo/analysis/mymodule/RB_genes_human'
 ```
 2. Edit line 141, 170 and 204 in `multiome_qc_workflow.sh` to your `analysis` directory. (Make sure to include all the scripts and save them in the same pattern)
-```python 141
+```python
 cd /data/niecr/ramaiar/multiome_lucyrepo/analysis/
 ```
 or 
 ```python
 cd /data/niecr/ramaiar/multiome_lucyrepo/analysis/souporcell
+```
+
+### Run the workflow
+Use `help` function to better understand the workflow inputs:
+```sh
+sh multiome_qc_workflow.sh --help
 ```
