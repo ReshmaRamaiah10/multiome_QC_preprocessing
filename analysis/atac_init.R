@@ -59,7 +59,7 @@ write.csv(getCellColData(proj),
             quote=FALSE)
     
 # get cellranger filtered cells
-cr_barcodes <- read.table(file.path(data_dir,sample_name,'outs','filtered_feature_bc_matrix/barcodes.tsv.gz'),
+cr_barcodes <- read.table(file.path(cr_outs,'filtered_feature_bc_matrix/barcodes.tsv.gz'),
                             header = FALSE,
                             col.names=c('barcode'))
 cr_barcodes$barcode <- paste0(sample_name,'#',cr_barcodes$barcode)
