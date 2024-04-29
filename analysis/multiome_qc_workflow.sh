@@ -131,9 +131,9 @@ submit_job() {
 #!/bin/bash
 #BSUB -J "rna_qc_$sample_name"
 #BSUB -q gpuqueue
-#BSUB -W 3:00
+#BSUB -W 5:00
 #BSUB -n 2
-#BSUB -R "rusage[mem=25]"
+#BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
@@ -160,9 +160,9 @@ EOF
 #!/bin/bash
 #BSUB -J "atac_qc_$sample_name"
 #BSUB -q gpuqueue
-#BSUB -W 3:00
+#BSUB -W 5:00
 #BSUB -n 2
-#BSUB -R "rusage[mem=25]"
+#BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
@@ -194,7 +194,7 @@ EOF
 #BSUB -q gpuqueue
 #BSUB -W 24:00
 #BSUB -n 2
-#BSUB -R "rusage[mem=50]"
+#BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
