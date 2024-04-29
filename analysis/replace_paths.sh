@@ -1,4 +1,6 @@
 #!/bin/bash
+# To run: Replace the souporcell directory path and conda env name BEFORE running this script
+# Usage: sh replace_paths.sh
 
 # Function to replace the old path and conda env name in a script with the current directory
 replace_paths() {
@@ -29,10 +31,8 @@ replace_paths() {
 script_path="multiome_qc_workflow.sh"
 
 # Change these values accordingly
-souporcell_scripts="/data/niecr/ramaiar/multiome_lucyrepo/analysis/souporcell"
-conda_env_name="multiome_winner"
-
-
+souporcell_scripts=SOUPORCELL_DIRECTORY     # example: "/data/niecr/ramaiah/multiome/analysis/suporcell"
+conda_env_name=CONDA_ENV_NAME               # example: "multiome_winner"
 
 # Call the function to replace paths
 replace_paths "$script_path" "$souporcell_scripts" "$conda_env_name"
