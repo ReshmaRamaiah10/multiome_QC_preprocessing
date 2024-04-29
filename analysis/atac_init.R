@@ -66,23 +66,29 @@ cr_barcodes$barcode <- paste0(sample_name,'#',cr_barcodes$barcode)
     
 # subset project
 proj_name <- 'cr_filt'
+print(paste0("Creating ArchR project. Project name:",proj_name))
 sub_proj <- subsetArchRProject(proj,
                                 cells = cr_barcodes$barcode,
                                 outputDirectory = proj_name,
                                 dropCells = TRUE)
     
 # run iterative LSI and UMAP
+print("Running Itterative LSI and adding UMAP")
 sub_proj <- addIterativeLSI(ArchRProj = sub_proj, useMatrix = "TileMatrix", name = "IterativeLSI")
 sub_proj <- addUMAP(sub_proj)
 sub_proj <- saveArchRProject(ArchRProj = sub_proj)
+print(paste0("Saving ArchR project. Project name:",proj_name))
     
 # export metadata
+print("Exporting cell_metadata.csv")
 write.csv(getCellColData(sub_proj), 
             file.path(proj_name, 'export', 'cell_metadata.csv'), 
             quote=FALSE)
+print("Exporting svd.csv")
 write.csv(getReducedDims(sub_proj), 
             file.path(proj_name, 'export', 'svd.csv'), 
             quote=FALSE)
+print("Exporting umap.csv")
 write.csv(getEmbedding(sub_proj), 
             file.path(proj_name, 'export', 'umap.csv'), 
             quote=FALSE)
