@@ -138,8 +138,8 @@ submit_job() {
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
 source ~/.bashrc
-cd /data/niecr/ramaiar/multiome_lucyrepo/analysis/
-conda run -n multiome_winner_test3 python rna_init.py -s "$sample_name" -i "$cr_outs" -o "$output_directory" $overwrite_flag
+cd CURRENT_DIRECTORY
+conda run -n CONDA_ENV_NAME python rna_init.py -s "$sample_name" -i "$cr_outs" -o "$output_directory" $overwrite_flag
 EOF
 
         # Submit the job using the temporary script file
@@ -167,8 +167,8 @@ EOF
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
 source ~/.bashrc
-cd /data/niecr/ramaiar/multiome_lucyrepo/analysis/
-conda run -n multiome_winner_test3 Rscript atac_init.R "$sample_name" "$cr_outs" "$output_directory"
+cd CURRENT_DIRECTORY
+conda run -n CONDA_ENV_NAME Rscript atac_init.R "$sample_name" "$cr_outs" "$output_directory"
 EOF
 
         # Submit the job using the temporary script file
@@ -201,7 +201,7 @@ EOF
 source ~/.bashrc
 
 module load singularity/3.7.1
-cd /data/niecr/ramaiar/multiome_lucyrepo/analysis/souporcell
+cd SOUPORCELL_DIRECTORY
 
 # ilc pre
 singularity exec souporcell_latest.sif souporcell_pipeline.py \
