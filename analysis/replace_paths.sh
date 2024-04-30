@@ -29,7 +29,7 @@ replace_paths() {
     echo "$script_content" > "$workflow_script"
 
     # Read the utils.py content
-    script_content=$(<"$utils_script")
+    script_content=$(<"$new_path"/mymodule/"$utils_script")
 
     # Replace script path
     script_content=${script_content//RIBO_GENE_PATH_REPLACE/$ribo_gene_path}
@@ -44,7 +44,7 @@ workflow_script="multiome_qc_workflow.sh"
 utils_script="utils.py"
 
 # Change these values accordingly
-souporcell_scripts=SOUPORCELL_DIRECTORY     # example: "/data/niecr/ramaiah/multiome/analysis/s0uporcell"
+souporcell_scripts=SOUPORCELL_DIRECTORY     # example: "/data/niecr/ramaiah/multiome/analysis/souporcell"
 conda_env_name=CONDA_ENV_NAME               # example: "multiome_winner"
 ribo_gene_path=RIBO_GENE_PATH_REPLACE       # example: "/data/niecr/ramaiah/multiome/analysis/mymodule/RB_genes_human"
 
