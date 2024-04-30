@@ -102,7 +102,7 @@ def calculate_qc_metrics(adata):
     sc.pp.calculate_qc_metrics(adata, inplace = True)
     
     # ribo content
-    RIBO_GENE_PATH = '/data/niecr/ramaiar/multiome_lucyrepo/analysis/mymodule/RB_genes_human'
+    RIBO_GENE_PATH = 'RIBO_GENE_PATH_REPLACE'
     ribo_genes = pd.read_csv(RIBO_GENE_PATH, header = None)[0].tolist()
     ribo_genes = adata.var_names[adata.var_names.isin(ribo_genes)]
     adata.var['ribo'] = adata.var_names.isin(ribo_genes)
