@@ -29,19 +29,19 @@ replace_paths() {
     echo "$script_content" > "$workflow_script"
 
     # Read the utils.py content
-    script_content=$(<"$new_path"/mymodule/"$utils_script")
+    script_content=$(<"$utils_script")
 
     # Replace script path
     script_content=${script_content//RIBO_GENE_PATH_REPLACE/$ribo_gene_path}
 
     # Write the updated content back to the script
-    echo "$script_content" > "$new_path"/mymodule/"$utils_script"
+    echo "$script_content" > "$utils_script"
     
 }
 
 # Example script file
 workflow_script="multiome_qc_workflow.sh"
-utils_script="utils.py"
+utils_script="mymodule/utils.py"
 
 # Change these values accordingly
 souporcell_scripts=SOUPORCELL_DIRECTORY     # example: "/data/niecr/ramaiah/multiome/analysis/souporcell"
