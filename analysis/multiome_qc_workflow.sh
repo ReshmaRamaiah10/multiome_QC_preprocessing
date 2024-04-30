@@ -28,13 +28,13 @@ while [[ $# -gt 0 ]]; do
             souporcell=true
             shift
             ;;
+        --assign_geno)
+            assign_geno=true
+            shift
+            ;;
         --overwrite_rna)
             overwrite_rna=true
             shift
-            ;;
-        -n|--n_genotypes)
-            n_genotypes="$2"
-            shift 2
             ;;
         -i|--input)
             input_directory="$2"
@@ -48,7 +48,7 @@ while [[ $# -gt 0 ]]; do
             dd_file="$2"
             shift 2
             ;;
-        -r|--ref_genome)
+        -r|--ref_genome)    # soup file
             ref_genome="$2"
             shift 2
             ;;
@@ -84,15 +84,19 @@ if [[ $help == true ]]; then
 fi
 
 # Check for mandatory arguments
-if [[ -z $input_directory || -z $output_directory ]]; then
-    echo "Error: Input and output directories are required. Refer --help function"
+if [[ !($rna || $atac || $souporcell || $assign_geno) ]]; then
+    echo "Error: Specify either RNA, ATAC, souporcell, or assign_geno sub-workflow. Refer to the --help function."
+    exit 1
+elif [[ $assign_geno != true && ( -z $input_directory || -z $output_directory ) ]]; then
+    echo "Error: Input and output directories are required. Refer to the --help function."
     exit 1
 fi
 
-# Check if RNA or ATAC workflow is specified
-if [[ $rna != true && $atac != true && $souporcell != true ]]; then
-    echo "Error: RNA or ATAC or souporcell workflow must be specified. Refer --help function"
-    exit 1
+if [[ $assign_geno || $souporcell ]]; then
+    if [[ -z $output_directory || -z $dd_file ]]; then
+        echo "Error: Input CSV file and output folder are required. Refer to the --help function."
+        exit 1
+    fi
 fi
 
 # Function to submit LSF job
@@ -103,13 +107,21 @@ submit_job() {
     output_directory="$4"
     
     # Find cellranger output directory
-    if [[ -d "${input_directory}/${sample_name}/raw_feature_bc_matrix" ]]; then
-        cr_outs="${input_directory}/${sample_name}"
-    elif [[ -d "${input_directory}/${sample_name}/outs/raw_feature_bc_matrix" ]]; then
-        cr_outs="${input_directory}/${sample_name}/outs"
-    else
-        echo "Error: raw_feature_bc_matrix directory not found for sample $sample_name"
-        return 1
+    if [[ $rna == true || $atac == true || $souporcell == true ]]; then
+        if [[ -d "${input_directory}/${sample_name}/raw_feature_bc_matrix" ]]; then
+            cr_outs="${input_directory}/${sample_name}"
+        elif [[ -d "${input_directory}/${sample_name}/outs/raw_feature_bc_matrix" ]]; then
+            cr_outs="${input_directory}/${sample_name}/outs"
+        else
+            echo "Error: raw_feature_bc_matrix directory not found for sample $sample_name"
+            return 1
+        fi
+    fi
+    
+    # Create sample output directory
+    if [ ! -d "${output_directory}/${sample_name}" ]; then
+        mkdir -p "${output_directory}/${sample_name}"
+        echo "Creating: ${output_directory}/${sample_name}"
     fi
     
     #-------------------------------------------------#
@@ -182,17 +194,24 @@ EOF
     #-------------------------------------------------#
     elif [[ $script_type == "souporcell" ]]; then
         echo "Submitting job for $sample_name (type: $script_type)"
+        assign_geno=${5:-false}
+        ref_genome="$6"
+        n_genotypes="$7"
+        vcf_file="$8"
         
-        n_genotypes="$5"
-        vcf_files="$6"
-    
+        soup_out="$output_directory/$sample_name/RNAsoup_out"
+        if [ ! -d "$soup_out" ]; then
+            mkdir -p "$soup_out"
+            echo "Creating: $soup_out"
+        fi
+        
         # Create a temporary LSF script file for ATAC
         temp_script=$(mktemp)
         cat > $temp_script <<EOF
 #!/bin/bash
 #BSUB -J "souporcell_$sample_name"
 #BSUB -q gpuqueue
-#BSUB -W 24:00
+#BSUB -W 10:00
 #BSUB -n 2
 #BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
@@ -202,22 +221,23 @@ source ~/.bashrc
 
 module load singularity/3.7.1
 cd SOUPORCELL_DIRECTORY
-
+     
 # ilc pre
-singularity exec souporcell_latest.sif souporcell_pipeline.py \
-    -i "$cr_outs"/gex_possorted_bam.bam \
-    -b "$cr_outs"/filtered_feature_bc_matrix/barcodes.tsv.gz \
-    -f "$ref_genome" \
+singularity exec --bind "$cr_outs":/data,"$ref_genome":/ref,"$soup_out":/out souporcell_latest.sif souporcell_pipeline.py \
+    -i /data/gex_possorted_bam.bam \
+    -b /data/filtered_feature_bc_matrix/barcodes.tsv.gz \
+    -f /ref/fasta/genome.fa \
     -t 8 \
-    -o "$output_directory"/"$sample_name"/RNAsoup_out \
+    -o /out/ \
     -k "$n_genotypes"
     
-singularity exec Demuxafy.sif bash souporcell_summary.sh "$output_directory"/"$sample_name"/RNAsoup_out/clusters.tsv > "$output_directory"/"$sample_name"/RNAsoup_out/souporcell_summary.tsv
+singularity exec --bind "$soup_out":/out Demuxafy.sif bash souporcell_summary.sh /out/clusters.tsv > /out/souporcell_summary.tsv
 
-singularity exec Demuxafy.sif Assign_Indiv_by_Geno.R \
-    -r "$vcf_files" \
-    -c "$output_directory"/"$sample_name"/RNAsoup_out/cluster_genotypes.vcf \
-    -o "$output_directory"/"$sample_name"/RNAsoup_out
+if [[ $assign_geno == true ]]; then
+    singularity exec --bind "$soup_out":/out,"$vcf_file":/mnt/genotypes.vcf Demuxafy.sif Assign_Indiv_by_Geno.R \
+        -r /mnt/genotypes.vcf \
+        -c /out/cluster_genotypes.vcf \
+        -o /out
 EOF
 
         # Submit the job using the temporary script file
@@ -225,9 +245,54 @@ EOF
 
         # Remove the temporary script file
         rm $temp_script
+        
     
-    fi
+    #-------------------------------------------------#
+             # DEMUXAFY GENOTYPE ASSIGNMENT
+    #-------------------------------------------------#
+    elif [[ $script_type == "assign_geno" ]]; then
+        echo "Submitting job for $sample_name (type: $script_type)"
+        vcf_file="$5"
+        
+        soup_out="$output_directory/$sample_name/RNAsoup_out"
+        if [[ -d "$soup_out/cluster_genotypes.vcf" ]]; then
+            echo "Error: $soup_out/cluster_genotypes.vcf not found"
+            return 1
+        elif [[ -d "$vcf_file" ]]; then
+            echo "Error: $vcf_file not found"
+            return 1
+        fi
+        
+        # Create a temporary LSF script file for ATAC
+        temp_script=$(mktemp)
+        cat > $temp_script <<EOF
+#!/bin/bash
+#BSUB -J "assign_geno_$sample_name"
+#BSUB -q gpuqueue
+#BSUB -W 10:00
+#BSUB -n 2
+#BSUB -R "rusage[mem=100]"
+#BSUB -e "$output_directory/$sample_name/%J.err"
+#BSUB -o "$output_directory/$sample_name/%J.out"
 
+source ~/.bashrc
+
+module load singularity/3.7.1
+cd SOUPORCELL_DIRECTORY
+     
+singularity exec --bind "$soup_out":/out,"$vcf_file":/mnt/genotypes.vcf Demuxafy.sif Assign_Indiv_by_Geno.R \
+    -r /mnt/genotypes.vcf \
+    -c /out/cluster_genotypes.vcf \
+    -o /out
+EOF
+
+        # Submit the job using the temporary script file
+        bsub < $temp_script
+
+        # Remove the temporary script file
+        rm $temp_script
+
+    fi
 }
 
 # Read all sample names in the input directory
@@ -271,22 +336,25 @@ elif [[ -n $skip_samples ]]; then
     done
 fi
 
-if [[ $souporcell == true ]]; then
+if [[ $souporcell == true || $assign_geno == true ]]; then
     # Path to your CSV file
-    csv_file=$dd_file
+    input_csv_file=$dd_file
 
     # Read the CSV file line by line
-    while IFS=, read -r sample_name n_genotypes vcf_files; do
+    while IFS=, read -r sample_name n_genotypes vcf_file; do
         # Skip the header line
         if [[ $sample_name == "sample_name" ]]; then
             continue
         fi
-    
+
         echo "Processing sample: $sample_name"
         echo "Number of genotypes: $n_genotypes"
-        echo "VCF files: $vcf_files"
-    
-        submit_job "$sample_name" "souporcell" "$input_directory" "$output_directory" "$n_genotypes" "$vcf_files" "$ref_genome"
-   
-    done < "$csv_file"
+        echo "VCF files: $vcf_file"
+
+        if [[ $souporcell == true ]]; then
+            submit_job "$sample_name" "souporcell" "$input_directory" "$output_directory" "$assign_geno" "$ref_genome" "$n_genotypes" "$vcf_file"
+        elif [[ $assign_geno == true ]]; then
+            submit_job "$sample_name" "assign_geno" "$input_directory" "$output_directory" "$vcf_file"
+        fi
+    done < "$input_csv_file"
 fi
