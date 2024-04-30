@@ -35,7 +35,7 @@ replace_paths() {
     script_content=${script_content//RIBO_GENE_PATH_REPLACE/$ribo_gene_path}
 
     # Write the updated content back to the script
-    echo "$script_content" > "$utils_script"
+    echo "$script_content" > "$new_path"/mymodule/"$utils_script"
     
 }
 
