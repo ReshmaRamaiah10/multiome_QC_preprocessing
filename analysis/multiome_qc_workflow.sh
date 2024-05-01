@@ -223,7 +223,6 @@ source ~/.bashrc
 module load singularity/3.7.1
 cd SOUPORCELL_DIRECTORY
      
-# ilc pre
 singularity exec --bind "$cr_outs":/data,"$ref_genome":/ref,"$soup_out":/out souporcell_latest.sif souporcell_pipeline.py \
     -i /data/gex_possorted_bam.bam \
     -b /data/filtered_feature_bc_matrix/barcodes.tsv.gz \
