@@ -78,7 +78,7 @@ if [[ $help == true ]]; then
     echo "  --overwrite_rna    Overwrite RNA preprocessing results."
     echo "  -i, --input        Input directory (required)"
     echo "  -o, --output       Output directory (required)"
-    echo "  -d, --dd_file      Input file for souporcell double detection (required to run souporcell)"
+    echo "  -d, --dd_file      Input csv file for souporcell double detection. Columns = sample_name,n_genotypes,vcf_file. (required to run souporcell)"
     echo "  -r, --ref_genome   Refernce genome file for doublet detection (genome.fa)"
     exit 0
 fi
