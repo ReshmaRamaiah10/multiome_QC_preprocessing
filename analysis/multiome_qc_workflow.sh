@@ -75,6 +75,7 @@ if [[ $help == true ]]; then
     echo "  --rna              Process RNA data"
     echo "  --atac             Process ATAC data"
     echo "  --souporcell       Run souporcell doublet detection on RNA data"
+    echo "  --assign_geno      Correlate cluster to donor reference SNP genotypes"
     echo "  --overwrite_rna    Overwrite RNA preprocessing results."
     echo "  -i, --input        Input directory (required)"
     echo "  -o, --output       Output directory (required)"
