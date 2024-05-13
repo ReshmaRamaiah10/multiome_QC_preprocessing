@@ -231,7 +231,7 @@ singularity exec --bind "$cr_outs":/data,"$ref_genome":/ref,"$soup_out":/out sou
     -o /out/ \
     -k "$n_genotypes"
     
-singularity exec --bind "$soup_out":/out Demuxafy.sif bash souporcell_summary.sh /out/clusters.tsv > /out/souporcell_summary.tsv
+singularity exec --bind "$soup_out":/out Demuxafy.sif bash souporcell_summary.sh /out/clusters.tsv > "$soup_out"/souporcell_summary.tsv
 
 if [[ $assign_geno == true ]]; then
     singularity exec --bind "$soup_out":/out,"$vcf_file":/mnt/genotypes.vcf Demuxafy.sif Assign_Indiv_by_Geno.R \
