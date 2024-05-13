@@ -56,6 +56,7 @@ def subset_and_reprocess_rna(ad,
     # PCA
     sc.tl.pca(sub_ad, n_comps=n_pcs, use_highly_variable=True)
     sub_ad.obsm['X_pca_max'] = sub_ad.obsm['X_pca'].copy()
+    
     sub_ad.obsm['X_pca'] = sub_ad.obsm['X_pca_max'][:, :knee]
     
     # UMAP
@@ -76,25 +77,47 @@ def subset_and_reprocess_rna(ad,
 def run_doubletdetection(ad, sample_col = 'sample', layer = None):
     ad.obs['doublet'] = np.nan
     ad.obs['doublet_score'] = np.nan
-
+ 
     # Calculate doublets on a per sample basis
-    doublet_sample_counts_d = {}
     sample_names = ad.obs[sample_col].unique()
     for sample in sample_names:
         clf = doubletdetection.BoostClassifier()
-
+ 
         sub_ad = ad[ad.obs[sample_col] == sample, :]
         if layer == None:
             counts = sub_ad.X
         else: counts = sub_ad.layers[layer]
+<<<<<<< HEAD:analysis/mymodule/utils.py
+ 
+=======
 
+>>>>>>> main:analysis/utils.py
         warnings.filterwarnings('ignore')
         doublets = clf.fit(counts).predict(p_thresh=1e-7, voter_thresh=0.8)
         doublet_score = clf.doublet_score()
         warnings.filterwarnings('default')
-
+ 
         # Store doublets in adata
         ad.obs.loc[ad.obs[sample_col] == sample, 'doublet'] = doublets
         ad.obs.loc[ad.obs[sample_col] == sample, 'doublet_score'] = doublet_score
-
+        
+def calculate_qc_metrics(adata):
+    # calculate qc metrics
+    sc.pp.calculate_qc_metrics(adata, inplace = True)
+    
+    # ribo content
+    RIBO_GENE_PATH = 'RIBO_GENE_PATH_REPLACE'
+    ribo_genes = pd.read_csv(RIBO_GENE_PATH, header = None)[0].tolist()
+    ribo_genes = adata.var_names[adata.var_names.isin(ribo_genes)]
+    adata.var['ribo'] = adata.var_names.isin(ribo_genes)
+    row_sum_adata_ribo = np.sum(adata[:, ribo_genes].X.toarray(), axis=1)
+    adata.obs['ribo_pct'] = row_sum_adata_ribo / adata.obs['total_counts'] * 100
+    
+    # mito content
+    mt_genes = adata.var_names[adata.var_names.str.startswith('MT-')]
+    adata.var['mito'] = adata.var_names.isin(mt_genes)
+    row_sum_adata_mito = np.sum(adata[:, mt_genes].X.toarray(), axis=1)
+    adata.obs['mito_pct'] = row_sum_adata_mito / adata.obs['total_counts'] * 100
+    
+    return adata
 

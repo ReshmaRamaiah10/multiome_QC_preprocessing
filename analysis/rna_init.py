@@ -1,3 +1,4 @@
+import os
 import argparse
 import scanpy as sc
 import numpy as np
@@ -5,12 +6,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy
 import seaborn as sns
-import os
 import anndata
 from scipy.io import mmread
-import utils
+import mymodule.utils as utils
 
-RIBO_GENE_PATH = '/data/peer/lpaddock/data/utils/RB_genes_human'
+def check_files_exist(sample_name, outs_dir):
+    qc_plots_dir = os.path.join(outs_dir, sample_name, "QC_plots")
+    required_files = [
+        os.path.join(qc_plots_dir, "ribo_content.png"),
+        os.path.join(qc_plots_dir, "MT_content_pre_filt.png"),
+        os.path.join(qc_plots_dir, "gene_metadata_pre_filt.png"),
+        os.path.join(qc_plots_dir, "cells_genes_correlation_pre_filt.png"),
+        os.path.join(outs_dir, sample_name, "pre_filt_rna_adata.h5ad"),
+        os.path.join(outs_dir, sample_name, "cr_filt_rna_adata.h5ad")
+    ]
+    return all([os.path.exists(file_path) for file_path in required_files])
 
 def ribo_content_plots(adata, output_dir):
 
@@ -113,93 +123,76 @@ def load_anndata(mtx_dir):
     var.index = var['name'].tolist()
     obs = barcodes
     obs.index = obs['og_barcode'].tolist()
-    rna_adata = anndata.AnnData(matrix[gene_features,:].T,
-                    var = var,
-                    obs = obs)
-    rna_adata.var_names_make_unique()
-
-    return rna_adata, atac_adata
-
-def calculate_qc_metrics(adata):
-    # calculate qc metrics
-    sc.pp.calculate_qc_metrics(adata, inplace = True)
-    # ribo content
-    ribo_genes = pd.read_csv(RIBO_GENE_PATH, header = None)[0].tolist()
-    ribo_genes = adata.var_names[adata.var_names.isin(ribo_genes)]
-    adata.var['ribo'] = adata.var_names.isin(ribo_genes)
-    row_sum_adata_ribo = np.sum(adata[:, ribo_genes].X.toarray(), axis=1)
-    adata.obs['ribo_pct'] = row_sum_adata_ribo / adata.obs['total_counts'] * 100
-    # mito content
-    mt_genes = adata.var_names[adata.var_names.str.startswith('MT-')]
-    adata.var['mito'] = adata.var_names.isin(mt_genes)
-    row_sum_adata_mito = np.sum(adata[:, mt_genes].X.toarray(), axis=1)
-    adata.obs['mito_pct'] = row_sum_adata_mito / adata.obs['total_counts'] * 100
+    adata = anndata.AnnData(matrix[gene_features,:].T, var = var, obs = obs)
+    adata.var_names_make_unique()
     return adata
+
+def preprocess_anndata(sample_name, cr_outs, outs_dir, overwrite=False):
     
-def preprocess_anndata(data, outs_dir):
-    for sample_name in os.listdir(data):
-        sample_path = os.path.join(data, sample_name)
-        if os.path.isdir(sample_path):
-            print('Processing sample', sample_name)
-            mtx_dir = os.path.join(sample_path, "raw_feature_bc_matrix")
-            if os.path.exists(mtx_dir):
-                adata = load_anndata(mtx_dir)
-                
-                # rename barcodes to sample_name+barcodes and add the sample data to anndata
-                adata.obs_names = [f"{sample_name}#{barcode}" for barcode in adata.obs_names]
-                adata.obs['batch'] = sample_name
+    print('Processing sample', sample_name)
+    mtx_dir = os.path.join(cr_outs, "raw_feature_bc_matrix")
 
-                # get qc metrics
-                calculate_qc_metrics(adata)
-                
-                # save as a new h5ad file
-                sample_outs_dir = os.path.join(outs_dir, sample_name)
-                os.makedirs(sample_outs_dir, exist_ok=True)
-                adata.write_h5ad(os.path.join(sample_outs_dir, f"pre_filt_rna_adata.h5ad"))
-                print("Saving modified adata as pre_filt_rna_adata.h5ad")
+    # Check if all required files are already present
+    if os.path.exists(mtx_dir):
+        adata = load_anndata(mtx_dir)
+        # rename barcodes to sample_name+barcodes and add the sample data to anndata
+        adata.obs_names = [f"{sample_name}#{barcode}" for barcode in adata.obs_names]
+        adata.obs['batch'] = sample_name
 
-                # create a new directory to save the plots
-                qc_plots_dir = os.path.join(sample_outs_dir, "QC_plots")
-                os.makedirs(qc_plots_dir, exist_ok=True)
+        # get qc metrics
+        adata = utils.calculate_qc_metrics(adata)
+        # save as a new h5ad file
+        sample_outs_dir = os.path.join(outs_dir, sample_name)
+        os.makedirs(sample_outs_dir, exist_ok=True)
+        adata.write_h5ad(os.path.join(sample_outs_dir, f"pre_filt_rna_adata.h5ad"))
+        print("Saving modified adata as pre_filt_rna_adata.h5ad", sample_name)
 
-                # generate qc plots prior to filteration
-                print('Generating pre-filtering QC plots')
-                cells_genes_correlation_plots(adata.obs['log1p_total_counts'], adata.obs['log1p_n_genes_by_counts'], qc_plots_dir)
-                genes_metadata_plots(adata.var['n_cells_by_counts'], qc_plots_dir)
-                mt_content_plots(adata, qc_plots_dir)
-                ribo_content_plots(adata, qc_plots_dir)
-                
-                # get cellranger filtered barcodes
-                print('Subsetting by cellranger filtered cells')
-                filt_bc_path = os.path.join(sample_path, "filtered_feature_bc_matrix/barcodes.tsv.gz")
-                cr_cells = pd.read_csv(filt_bc_path,sep='\t',compression='gzip',header=None)[0].tolist()
-                cr_cells = [sample_name + '#' + x for x in cr_cells]
-                
-                # subset + embed
-                filt_ad = utils.subset_and_reprocess_rna(adata,cr_cells)
-                
-                # run doubletdetection on filtered anndata
-                utils.run_doubletdetection(filt_ad, sample_col = 'batch', layer = 'raw_counts')
-                
-                # save filtered anndata
-                filt_ad.write_h5ad(os.path.join(sample_outs_dir, f"cr_filt_rna_adata.h5ad"))
-                print('Processed sample', sample_name)
-                
+        # create a new directory to save the plots
+        qc_plots_dir = os.path.join(sample_outs_dir, "QC_plots")
+        os.makedirs(qc_plots_dir, exist_ok=True)
 
+        # generate qc plots prior to filteration
+        print('Generating pre-filtering QC plots', sample_name)
+        cells_genes_correlation_plots(adata.obs['log1p_total_counts'], adata.obs['log1p_n_genes_by_counts'], qc_plots_dir)
+        genes_metadata_plots(adata.var['n_cells_by_counts'], qc_plots_dir)
+        mt_content_plots(adata, qc_plots_dir)
+        ribo_content_plots(adata, qc_plots_dir)
+                
+        # get cellranger filtered barcodes
+        print('Subsetting by cellranger filtered cells', sample_name)
+        filt_bc_path = os.path.join(cr_outs, "filtered_feature_bc_matrix/barcodes.tsv.gz")
+        cr_cells = pd.read_csv(filt_bc_path,sep='\t',compression='gzip',header=None)[0].tolist()
+        cr_cells = [sample_name + '#' + x for x in cr_cells]
+                
+        # subset + embed
+        filt_ad = utils.subset_and_reprocess_rna(adata,cr_cells)
+                
+        # run doubletdetection on filtered anndata
+        utils.run_doubletdetection(filt_ad, sample_col = 'batch', layer = 'raw_counts')
+                
+        # save filtered anndata
+        filt_ad.write_h5ad(os.path.join(sample_outs_dir, f"cr_filt_rna_adata.h5ad"))
+        print('Finished processing sample', sample_name)
+        print('Output files are stored in:', sample_outs_dir)
+
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process data for quality control.')
-    parser.add_argument('--path', '-p', type=str, help='Path to the data directory.')
+    parser.add_argument('--sample', '-s', type=str, help='Sample name (should match with the directory name)')
+    parser.add_argument('--data', '-i', type=str, help='Path to cellranger output directory.')
     parser.add_argument('--out', '-o', type=str, help='Path to the output directory.')
+    parser.add_argument('--overwrite', action='store_true', help='Overwrite existing files.')
     args = parser.parse_args()
-
-    if args.path:
-        sample_dir = args.path
+    sample_name = args.sample
+    cr_outs = args.data
+    outs_dir = args.out
+    overwrite = args.overwrite
+    
+    if overwrite == False:
+        exists = check_files_exist(sample_name, outs_dir)
+        if exists == True:
+            print("Results for sample", sample_name, "is already present. If you would like to overwrite the results please add overwrite option while running the script.")
+        else:
+            preprocess_anndata(sample_name, cr_outs, outs_dir)
     else:
-        sample_dir = os.getcwd()
-        
-    if args.out:
-        outs_dir = args.out
-    else:
-        outs_dir = os.getcwd()
-
-    preprocess_anndata(sample_dir, outs_dir)
+        preprocess_anndata(sample_name, cr_outs, outs_dir)
