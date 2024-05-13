@@ -238,6 +238,7 @@ if [[ $assign_geno == true ]]; then
         -r /mnt/genotypes.vcf \
         -c /out/cluster_genotypes.vcf \
         -o /out
+fi
 EOF
 
         # Submit the job using the temporary script file
