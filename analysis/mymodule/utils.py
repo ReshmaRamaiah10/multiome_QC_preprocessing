@@ -87,11 +87,6 @@ def run_doubletdetection(ad, sample_col = 'sample', layer = None):
         if layer == None:
             counts = sub_ad.X
         else: counts = sub_ad.layers[layer]
-<<<<<<< HEAD:analysis/mymodule/utils.py
- 
-=======
-
->>>>>>> main:analysis/utils.py
         warnings.filterwarnings('ignore')
         doublets = clf.fit(counts).predict(p_thresh=1e-7, voter_thresh=0.8)
         doublet_score = clf.doublet_score()
