@@ -219,6 +219,7 @@ EOF
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
 source ~/.bashrc
+conda activate CONDA_ENV_NAME
 
 module load singularity/3.7.1
 cd SOUPORCELL_DIRECTORY
@@ -239,6 +240,7 @@ if [[ $assign_geno == true ]]; then
         -c /out/cluster_genotypes.vcf \
         -o /out
 fi
+conda deactivate
 EOF
 
         # Submit the job using the temporary script file
@@ -277,6 +279,7 @@ EOF
 #BSUB -o "$output_directory/$sample_name/%J.out"
 
 source ~/.bashrc
+conda activate CONDA_ENV_NAME
 
 module load singularity/3.7.1
 cd SOUPORCELL_DIRECTORY
@@ -285,6 +288,7 @@ singularity exec --bind "$soup_out":/out,"$vcf_file":/mnt/genotypes.vcf Demuxafy
     -r /mnt/genotypes.vcf \
     -c /out/cluster_genotypes.vcf \
     -o /out
+conda deactivate
 EOF
 
         # Submit the job using the temporary script file
