@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Multiome QC preprocessing
 A collection of scripts and notebooks that take single-cell multiome data from cellranger output to a QC-filtered and preprocessed dataset.
 
@@ -28,4 +27,3 @@ A collection of scripts and notebooks to take multiple samples of single-cell mu
 - A variety of calculated QC metrics.
 - A filtered (default cellranger filtering) and unfiltered version of the sample.
 - Initial RNA and ATAC embeddings of the filtered data.
->>>>>>> main
