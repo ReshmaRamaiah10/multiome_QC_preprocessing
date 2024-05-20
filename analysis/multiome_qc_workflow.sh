@@ -212,7 +212,7 @@ EOF
 #!/bin/bash
 #BSUB -J "souporcell_$sample_name"
 #BSUB -q gpuqueue
-#BSUB -W 10:00
+#BSUB -W 24:00
 #BSUB -n 2
 #BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
@@ -272,7 +272,7 @@ EOF
 #!/bin/bash
 #BSUB -J "assign_geno_$sample_name"
 #BSUB -q gpuqueue
-#BSUB -W 10:00
+#BSUB -W 24:00
 #BSUB -n 2
 #BSUB -R "rusage[mem=100]"
 #BSUB -e "$output_directory/$sample_name/%J.err"
